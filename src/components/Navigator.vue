@@ -1,35 +1,39 @@
 <template>
     <div id="navigator">
-        <el-row type="flex" :gutter="15" align="middle">
-            <el-col :span="4">
-                <div class="grid-content bg-purple-dark">Logo</div>
-            </el-col>
-            <el-col :span="14">
-                <el-row class="search" type="flex" align="middle">
-                    <el-col class="button-wrap" :span="2" :offset="22" v-show="!onSearch">
-                        <el-button type="text" icon="el-icon-search" class="search-button" @click="search"></el-button>
-                    </el-col>
-                    <el-col v-show="onSearch" :span="24">
-                        <transition name="slide-fade">
-                            <el-form v-show="onSearch">
-                                <el-form-item>
-                                    <el-input placeholder="Search" suffix-icon="el-icon-search" @blur="search" ref="searchBox"></el-input>
-                                </el-form-item>
-                            </el-form>
-                        </transition>
-                    </el-col>
-                </el-row>
-            </el-col>
-            <el-col :span="6">
-                <el-row type="flex" class="operation" align="middle">
-                    <el-col :span="24">
-                        <span v-for="(menu, key) in buttons" :key="menu.router" @click="moveTo(menu.router)">
-                            <span class="button">{{menu.text}}</span>
-                        </span>
-                    </el-col>
-                </el-row>
-            </el-col>
-        </el-row>
+        <el-menu :default-active="activeIndex" mode="horizontal"
+            background-color="#1199cc"
+            text-color="#fff"
+            menu-trigger="click"
+            active-text-color="#FF6666"
+            :router="true">
+            <el-menu-item index="/">首页</el-menu-item>
+            <el-submenu index="/">
+                <template slot="title">档案</template>
+                <el-menu-item index="/x1">1</el-menu-item>
+                <el-menu-item index="/x2">2</el-menu-item>
+                <el-menu-item index="/x3">3</el-menu-item>
+            </el-submenu>
+            <el-menu-item index="/map">Map</el-menu-item>
+
+            <el-row type="flex" :gutter="15" align="middle">
+                <el-col :span="16" :offset="7">
+                    <el-row class="search" type="flex" align="middle">
+                        <el-col class="button-wrap" :span="2" :offset="22" v-show="!onSearch">
+                            <el-button type="text" icon="el-icon-search" class="search-button" @click="search"></el-button>
+                        </el-col>
+                        <el-col v-show="onSearch" :span="24">
+                            <transition name="slide-fade">
+                                <el-form v-show="onSearch">
+                                    <el-form-item>
+                                        <el-input placeholder="Search" suffix-icon="el-icon-search" @blur="search" ref="searchBox"></el-input>
+                                    </el-form-item>
+                                </el-form>
+                            </transition>
+                        </el-col>
+                    </el-row>
+                </el-col>
+            </el-row>
+        </el-menu>
     </div>
 </template>
 
@@ -39,17 +43,12 @@ export default {
     data() {
         return {
             user: 'Primo',
-            onSearch: false,
-            buttons: [{
-                text: 'Map',
-                router: '/map'
-            }, {
-                text: 'Settings',
-                router: '/'
-            }, {
-                text: 'Primo',
-                router: '/user'
-            }]
+            onSearch: false
+        }
+    },
+    computed: {
+        activeIndex: function() {
+            return this.$router.currentRoute.path
         }
     },
     methods: {
@@ -60,9 +59,6 @@ export default {
                     this.$refs.searchBox.focus()
                 })
             }
-        },
-        moveTo: function(router) {
-            this.$router.push({ path: router })
         }
     }
 }
@@ -86,7 +82,7 @@ export default {
     background-color: #0099CC;
 
     .el-row {
-        height: 50px;
+        height: 60px;
 
         .el-from {
             .el-form-item {
@@ -103,31 +99,15 @@ export default {
                 margin-bottom: 0;
             }
             .button-wrap {
-                height: 50px;
+                height: 60px;
                 position: relative;
                 .search-button {
                     width: 35px;
                     position: absolute;
                     right: 0;
                     top: 0;
-                    padding: 18px 0;
+                    padding: 23px 0;
                 }
-            }
-        }
-
-        .operation {
-            .button {
-                height: 50px;
-                padding: 0 20px;
-                display: inline-block;
-                line-height: 50px;
-                cursor: pointer;
-                &:hover {
-                    background-color: #336699;
-                }
-            }
-            .el-col {
-                height: 50px;
             }
         }
     }
