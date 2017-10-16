@@ -22,11 +22,10 @@
             </el-col>
             <el-col :span="6">
                 <el-row type="flex" class="operation" align="middle">
-                    <el-col :span="12">
-                        <div class="button">Settings</div>
-                    </el-col>
-                    <el-col :span="12">
-                        <div class="button">{{user}}</div>
+                    <el-col :span="24">
+                        <span v-for="(menu, key) in buttons" :key="menu.router" @click="moveTo(menu.router)">
+                            <span class="button">{{menu.text}}</span>
+                        </span>
                     </el-col>
                 </el-row>
             </el-col>
@@ -40,7 +39,17 @@ export default {
     data() {
         return {
             user: 'Primo',
-            onSearch: false
+            onSearch: false,
+            buttons: [{
+                text: 'Map',
+                router: '/map'
+            }, {
+                text: 'Settings',
+                router: '/'
+            }, {
+                text: 'Primo',
+                router: '/user'
+            }]
         }
     },
     methods: {
@@ -51,6 +60,9 @@ export default {
                     this.$refs.searchBox.focus()
                 })
             }
+        },
+        moveTo: function(router) {
+            this.$router.push({ path: router })
         }
     }
 }
@@ -104,8 +116,10 @@ export default {
         }
 
         .operation {
-            div.button {
+            .button {
                 height: 50px;
+                padding: 0 20px;
+                display: inline-block;
                 line-height: 50px;
                 cursor: pointer;
                 &:hover {
