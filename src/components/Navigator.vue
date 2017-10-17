@@ -4,7 +4,7 @@
             background-color="#1199cc"
             text-color="#fff"
             menu-trigger="click"
-            active-text-color="#FF6666"
+            active-text-color="#FFB400"
             :router="true">
             <el-menu-item index="/">首页</el-menu-item>
             <el-submenu index="/">
