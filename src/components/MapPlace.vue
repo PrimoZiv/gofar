@@ -16,15 +16,6 @@ export default {
     name: 'Map',
     data() {
         return {
-            places: [
-                { name: '山西', selected: true },
-                { name: '四川', selected: true },
-                { name: '内蒙古', selected: true },
-                { name: '北京', selected: true },
-                { name: '福建', selected: true },
-                { name: '重庆', selected: true },
-                { name: '广东', selected: true }
-            ]
         }
     },
     mounted() {
@@ -32,7 +23,6 @@ export default {
     },
     methods: {
         drawLine() {
-            // let map = this
             var data = [
                 { name: '怀仁', value: 300 },
                 { name: '成都', value: 300 },
@@ -176,36 +166,6 @@ export default {
                         },
                         zlevel: 1
                     }
-                    // , {
-                    //     name: '中国',
-                    //     type: 'map',
-                    //     roam: true,
-                    //     scaleLimit: {
-                    //         min: 1,
-                    //         max: 5
-                    //     },
-                    //     mapType: 'china',
-                    //     label: {
-                    //         normal: {
-                    //             show: false
-                    //         },
-                    //         emphasis: {
-                    //             show: true
-                    //         }
-                    //     },
-                    //     itemStyle: {
-                    //         normal: {
-                    //         },
-                    //         emphasis: {
-                    //             areaColor: '#67C6E6',
-                    //             shadowColor: 'rgba(40, 40, 40, 0.7)',
-                    //             shadowBlur: 10,
-                    //             shadowOffsetX: 1,
-                    //             shadowOffsetY: -1
-                    //         }
-                    //     },
-                    //     data: map.places
-                    // }
                 ]
             }
             // 绘制图表

@@ -8,12 +8,11 @@
             :router="true">
             <el-menu-item index="/">首页</el-menu-item>
             <el-submenu index="/">
-                <template slot="title">档案</template>
-                <el-menu-item index="/x1">1</el-menu-item>
-                <el-menu-item index="/x2">2</el-menu-item>
-                <el-menu-item index="/x3">3</el-menu-item>
+                <template slot="title">Map</template>
+                <el-menu-item index="/map-place">地点</el-menu-item>
+                <el-menu-item index="/map-province">省份</el-menu-item>
             </el-submenu>
-            <el-menu-item index="/map">Map</el-menu-item>
+            <el-menu-item index="/travel">游记</el-menu-item>
 
             <el-row type="flex" :gutter="15" align="middle">
                 <el-col :span="16" :offset="7">
