@@ -1,28 +1,22 @@
 <template>
     <div>
-        <div id="myChart"></div>
+        <echarts-map :option="option"></echarts-map>
     </div>
 </template>
 
 <script>
-let echarts = require('echarts/lib/echarts')
-require('echarts/map/js/china')
-require('echarts/lib/chart/map')
-require('echarts/lib/coord/geo/Geo')
-require('echarts/lib/component/tooltip')
-require('echarts/lib/component/title')
-
+import EchartsMap from './Map'
 export default {
     name: 'MapPlace',
     data() {
         return {
         }
     },
-    mounted() {
-        this.drawLine()
+    components: {
+        EchartsMap
     },
-    methods: {
-        drawLine() {
+    computed: {
+        option: function() {
             var data = [
                 { name: '怀仁', value: 300 },
                 { name: '成都', value: 300 },
@@ -66,8 +60,7 @@ export default {
                 }
                 return res
             }
-            let myChart = echarts.init(document.getElementById('myChart'))
-            let option = {
+            return {
                 title: {
                     text: '那些我曾去过的地方',
                     left: 'center',
@@ -168,8 +161,6 @@ export default {
                     }
                 ]
             }
-            // 绘制图表
-            myChart.setOption(option)
         }
     }
 }

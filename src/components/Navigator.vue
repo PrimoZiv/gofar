@@ -47,7 +47,7 @@ export default {
     },
     computed: {
         activeIndex: function() {
-            return this.$router.currentRoute.path
+            return this.$route.path
         }
     },
     methods: {
