@@ -40,15 +40,6 @@ export default {
                     trigger: 'item',
                     formatter: '{b}'
                 },
-                legend: {
-                    orient: 'vertical',
-                    y: 'bottom',
-                    x: 'right',
-                    data: ['Mark'],
-                    textStyle: {
-                        color: '#000'
-                    }
-                },
                 series: [
                     {
                         name: '中国',

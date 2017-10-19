@@ -1,7 +1,9 @@
 <template>
     <div id="app">
         <Navigator></Navigator>
-        <router-view/>
+        <div class="content" v-loading="isLoading">
+            <router-view/>
+        </div>
         <FarFooter></FarFooter>
     </div>
 </template>
@@ -12,6 +14,21 @@ import FarFooter from './components/Footer.vue'
 
 export default {
     name: 'app',
+    data: function() {
+        return {
+            isLoading: false
+        }
+    },
+    mounted: function() {
+        let app = this
+        this.$router.beforeEach((to, from, next) => {
+            app.isLoading = true
+            next()
+        })
+        this.$router.afterEach((to, from) => {
+            app.isLoading = false
+        })
+    },
     components: {
         Navigator,
         FarFooter

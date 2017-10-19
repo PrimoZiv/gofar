@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Main from '@/components/Main'
-import HelloWorld from '@/components/HelloWorld'
 
 // Async load component.
-const MapPlace = () => import('@/components/MapPlace')
-const MapProvince = () => import('@/components/MapProvince')
+const MapPlace = () => import(/* webpackChunkName: "Map" */'@/components/map/MapPlace')
+const MapProvince = () => import(/* webpackChunkName: "Map" */'@/components/map/MapProvince')
+const Travel = () => import(/* webpackChunkName: "Travel" */'@/components/travel/Travel')
 
 Vue.use(Router)
 
@@ -15,10 +15,6 @@ export default new Router({
         name: 'Main',
         component: Main
     }, {
-        path: '/hello',
-        name: 'Hello',
-        component: HelloWorld
-    }, {
         path: '/map-place',
         name: 'MapPlace',
         component: MapPlace
@@ -26,5 +22,8 @@ export default new Router({
         path: '/map-province',
         name: 'MapProvince',
         component: MapProvince
+    }, {
+        path: '/travel',
+        component: Travel
     }]
 })
