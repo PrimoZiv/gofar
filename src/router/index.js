@@ -1,9 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Main from '@/components/Main'
-import MapPlace from '@/components/MapPlace'
-import MapProvince from '@/components/MapProvince'
 import HelloWorld from '@/components/HelloWorld'
+
+// Async load component.
+const MapPlace = () => import('@/components/MapPlace')
+const MapProvince = () => import('@/components/MapProvince')
 
 Vue.use(Router)
 

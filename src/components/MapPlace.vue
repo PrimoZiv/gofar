@@ -13,7 +13,7 @@ require('echarts/lib/component/tooltip')
 require('echarts/lib/component/title')
 
 export default {
-    name: 'Map',
+    name: 'MapPlace',
     data() {
         return {
         }
