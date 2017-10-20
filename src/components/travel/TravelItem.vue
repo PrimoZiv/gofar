@@ -1,10 +1,16 @@
 <template>
     <div class="travel-item">
-        <div class="pic">
-            <div class="mask">
-                <span>{{data.title}}</span>
-                <div>{{data.abstract}}</div>
+        <div class="content">
+            <span class="title">{{data.title}}</span>
+            <div class="abstract">{{data.abstract}}</div>
+            <div class="tags">
+                <span v-for="(t, index) in data.tags" :key="index">{{t}}</span>
             </div>
+        </div>
+        <div class="pics">
+            <span class="pic" v-for="(p, index) in data.pics" :key="index">
+                <img :src="p.src" :alt="p.alt" />
+            </span>
         </div>
         <hr>
     </div>
@@ -19,42 +25,64 @@ export default {
 
 <style lang="scss" scoped>
 .travel-item {
+    height: 200px;
     margin-bottom: 30px;
+    .content {
+        height: 80px;
+        padding: 15px 20px;
+        position: relative;
+
+        .title {
+            font-size: 20px;
+            display: inline-block;
+            height: 30px;
+            line-height: 30px;
+            cursor: pointer;
+
+            &:hover {
+                color: #FFB400;
+            }
+        }
+
+        .abstract {
+            height: 60px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .tags {
+            position: absolute;
+            right: 10px;
+            top: 20px;
+
+            span {
+                padding: 5px 10px;
+                font-size: 12px;
+                color: #0099CC;
+            }
+        }
+    }
+    .pics {
+        height: 120px;
+        padding: 0 20px;
+
+        .pic {
+            display: inline-block;
+            height: 100px;
+            width: 100px;
+            margin-right: 20px;
+            background: #E0E0E0;
+
+            img {
+                height: 100px;
+                width: 100px;
+            }
+        }
+    }
     hr {
         border: none;
         border-top: 1px solid #E0E0E0;
     }
-    .pic {
-        height: 220px;
-        text-align: left;
-        margin-bottom: 20px;
-        position: relative;
-        background: url(../../assets/carousel3.jpg) no-repeat bottom;
-        background-size: 100% auto;
 
-        &:hover {
-            .mask {
-                background: -webkit-linear-gradient(top, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.3));
-            }
-        }
-
-        .mask {
-            height: 50px;
-            padding: 20px 20px 150px 20px;
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            right: 0;
-            background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
-
-            span {
-                font-size: 20px;
-                display: inline-block;
-                height: 30px;
-                line-height: 30px;
-                font-weight: bold;
-            }
-        }
-    }
 }
 </style>
