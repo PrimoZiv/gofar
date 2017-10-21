@@ -10,56 +10,12 @@ export default {
     name: 'MapPlace',
     data() {
         return {
+            data: []
         }
-    },
-    components: {
-        EchartsMap
     },
     computed: {
         option: function() {
-            var data = [
-                { name: '怀仁', value: 300 },
-                { name: '成都', value: 300 },
-                { name: '峨眉山', value: 200 },
-                { name: '深圳', value: 200 },
-                { name: '重庆', value: 100 },
-                { name: '大同', value: 50 },
-                { name: '太原', value: 100 },
-                { name: '厦门', value: 100 },
-                { name: '泉州', value: 100 },
-                { name: '惠州', value: 50 },
-                { name: '呼和浩特', value: 200 },
-                { name: '鄂尔多斯', value: 200 },
-                { name: '北京', value: 100 }
-            ]
-            var geoCoordMap = {
-                '成都': [104.06, 30.67],
-                '峨眉山': [103.761263, 29.582024],
-                '怀仁': [112.433387, 39.331261],
-                '大同': [113.3, 40.12],
-                '太原': [112.53, 37.87],
-                '深圳': [114.07, 22.62],
-                '重庆': [106.54, 29.59],
-                '泉州': [118.58, 24.93],
-                '厦门': [118.1, 24.46],
-                '惠州': [114.4, 23.09],
-                '呼和浩特': [111.65, 40.82],
-                '鄂尔多斯': [109.781327, 39.608266],
-                '北京': [116.46, 39.92]
-            }
-            var convertData = function(data) {
-                var res = []
-                for (var i = 0; i < data.length; i++) {
-                    var geoCoord = geoCoordMap[data[i].name]
-                    if (geoCoord) {
-                        res.push({
-                            name: data[i].name,
-                            value: geoCoord.concat(data[i].value)
-                        })
-                    }
-                }
-                return res
-            }
+            let self = this
             return {
                 title: {
                     text: '那些我曾去过的地方',
@@ -108,7 +64,7 @@ export default {
                         name: 'Mark',
                         type: 'scatter',
                         coordinateSystem: 'geo',
-                        data: convertData(data),
+                        data: self.data,
                         symbolSize: function(val) {
                             return val[2] / 10
                         },
@@ -132,9 +88,9 @@ export default {
                         name: 'Top 5',
                         type: 'effectScatter',
                         coordinateSystem: 'geo',
-                        data: convertData(data.sort(function(a, b) {
-                            return b.value - a.value
-                        }).slice(0, 6)),
+                        data: self.data.sort(function(a, b) {
+                            return b.value[2] - a.value[2]
+                        }).slice(0, 6),
                         symbolSize: function(val) {
                             return val[2] / 20
                         },
@@ -162,6 +118,22 @@ export default {
                 ]
             }
         }
+    },
+    mounted: function() {
+        this.$http.get('/static/data/mappoint.json').then(result => {
+            let data = result.body.data
+            this.data = []
+            for (let i = 0, len = data.length; i < len; i++) {
+                this.$set(this.data, i, {
+                    name: data[i].name,
+                    value: data[i].coord.concat(data[i].value)
+                })
+            }
+            this.$set(this.option.series, 1, this.option.series[1])
+        })
+    },
+    components: {
+        EchartsMap
     }
 }
 </script>

@@ -1,5 +1,6 @@
 <template>
-    <div id="chart-map"></div>
+    <div id="chart-map">
+    </div>
 </template>
 
 <script>
@@ -14,16 +15,28 @@ export default {
     name: 'EchartsMap',
     data() {
         return {
+            myChart: null
         }
     },
     props: ['option'],
     mounted() {
         this.drawLine()
     },
+    watch: {
+        option: {
+            handler: function() {
+                this.updateMap()
+            },
+            deep: true
+        }
+    },
     methods: {
         drawLine() {
-            let myChart = echarts.init(document.getElementById('chart-map'))
-            myChart.setOption(this.option)
+            this.myChart = echarts.init(document.getElementById('chart-map'))
+            this.myChart.setOption(this.option)
+        },
+        updateMap() {
+            this.myChart.setOption(this.option)
         }
     }
 }

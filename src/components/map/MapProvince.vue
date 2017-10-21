@@ -10,24 +10,7 @@ export default {
     name: 'MapProvince',
     data() {
         return {
-            places: [
-                { name: '山西', selected: true },
-                { name: '四川', selected: true },
-                { name: '内蒙古', selected: true },
-                { name: '北京', selected: true },
-                { name: '福建', selected: true },
-                { name: '重庆', selected: true },
-                { name: '广东', selected: true }
-            ]
-        }
-    },
-    components: {
-        EchartsMap
-    },
-    computed: {
-        option: function() {
-            let map = this
-            return {
+            option: {
                 title: {
                     text: '那些我曾去过的地方',
                     left: 'center',
@@ -69,11 +52,20 @@ export default {
                                 shadowOffsetY: -1
                             }
                         },
-                        data: map.places
+                        data: [{ 'name': '广东', 'selected': true }]
                     }
                 ]
             }
         }
+    },
+    mounted: function() {
+        this.$http.get('/static/data/footprint.json').then(result => {
+            this.option.series[0].data = result.body.data
+            this.$set(this.option.series, 0, this.option.series[0])
+        })
+    },
+    components: {
+        EchartsMap
     }
 }
 </script>

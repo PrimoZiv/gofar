@@ -1,0 +1,32 @@
+{
+    "name": "footprint",
+    "data": [{
+            "name": "山西",
+            "selected": true
+        },
+        {
+            "name": "四川",
+            "selected": true
+        },
+        {
+            "name": "内蒙古",
+            "selecte": true
+        },
+        {
+            "name": "北京",
+            "selected": true
+        },
+        {
+            "name": "福建",
+            "selected": true
+        },
+        {
+            "name": "重庆",
+            "selected": true
+        },
+        {
+            "name": "广东",
+            "selected": true
+        }
+    ]
+}
