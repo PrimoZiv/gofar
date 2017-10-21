@@ -43,14 +43,15 @@
 
 <script>
 export default {
-    name: 'Main'
+    name: 'Main',
+    mounted: function() {
+        this.$emit('loading')
+    }
 }
 </script>
 
 <style lang="scss" scoped>
 .el-carousel {
-    margin: 50px 0;
-
     .el-carousel__item--card:nth-child(3) {
         background: url(../assets/carousel1.jpg);
     }

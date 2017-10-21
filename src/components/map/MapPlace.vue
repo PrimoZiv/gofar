@@ -130,6 +130,7 @@ export default {
                 })
             }
             this.$set(this.option.series, 1, this.option.series[1])
+            this.$emit('loading')
         })
     },
     components: {
@@ -139,8 +140,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#myChart {
-    margin-top: 50px;
-    height: 750px;
-}
 </style>

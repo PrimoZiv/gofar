@@ -42,6 +42,9 @@ export default {
             }]
         }
     },
+    mounted: function() {
+        this.$emit('loading')
+    },
     components: {
         TravelItem
     }
@@ -49,7 +52,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .travel {
-        margin-top: 50px;
-    }
 </style>

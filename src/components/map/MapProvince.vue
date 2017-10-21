@@ -62,6 +62,7 @@ export default {
         this.$http.get('/static/data/footprint.json').then(result => {
             this.option.series[0].data = result.body.data
             this.$set(this.option.series, 0, this.option.series[0])
+            this.$emit('loading')
         })
     },
     components: {
@@ -71,8 +72,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#myChart {
-    margin-top: 50px;
-    height: 750px;
-}
 </style>

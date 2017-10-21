@@ -20,22 +20,22 @@ export default {
     },
     props: ['option'],
     mounted() {
-        this.drawLine()
+        // this.drawLine()
+        // 在mounted中执行效率会非常低，要找到原因！
     },
     watch: {
         option: {
             handler: function() {
-                this.updateMap()
+                this.drawLine()
             },
             deep: true
         }
     },
     methods: {
         drawLine() {
-            this.myChart = echarts.init(document.getElementById('chart-map'))
-            this.myChart.setOption(this.option)
-        },
-        updateMap() {
+            if (!this.myChart) {
+                this.myChart = echarts.init(document.getElementById('chart-map'))
+            }
             this.myChart.setOption(this.option)
         }
     }
@@ -44,7 +44,6 @@ export default {
 
 <style lang="scss" scoped>
 #chart-map {
-    margin-top: 50px;
     height: 750px;
 }
 </style>

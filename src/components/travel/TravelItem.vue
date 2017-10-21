@@ -25,8 +25,6 @@ export default {
 
 <style lang="scss" scoped>
 .travel-item {
-    height: 200px;
-    margin-bottom: 30px;
     .content {
         height: 80px;
         padding: 15px 20px;

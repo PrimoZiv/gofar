@@ -29,6 +29,8 @@ export default {
             app.isLoading = false
         })
     },
+    methods: {
+    },
     components: {
         Navigator,
         FarFooter
@@ -36,7 +38,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 #app {
     width: 1200px;
     margin: 0 auto;
@@ -45,5 +47,9 @@ export default {
     -moz-osx-font-smoothing: grayscale;
     text-align: left;
     color: #2c3e50;
+
+    &>.content {
+        padding-top: 50px;
+    }
 }
 </style>
