@@ -18,7 +18,8 @@ export default {
 
 <style scoped>
 .footer {
-    margin-top: 50px;
+    margin-top: 30px;
+    line-height: 50px;
     text-align: center;
     font-size: 13px;
 }

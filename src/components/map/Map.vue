@@ -21,7 +21,6 @@ export default {
     props: ['option'],
     mounted() {
         // this.drawLine()
-        // 在mounted中执行效率会非常低，要找到原因！
     },
     watch: {
         option: {

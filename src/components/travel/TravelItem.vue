@@ -12,6 +12,9 @@
                 <img :src="p.src" :alt="p.alt" />
             </span>
         </div>
+        <div class="footer">
+            <span>{{data.time | convertTime}}</span>
+        </div>
         <hr>
     </div>
 </template>
@@ -19,15 +22,21 @@
 <script>
 export default {
     name: 'TravelItem',
-    props: ['data']
+    props: ['data'],
+    filters: {
+        convertTime: function(val) {
+            return new Date(val).toLocaleString()
+        }
+    }
 }
 </script>
 
 <style lang="scss" scoped>
 .travel-item {
+    width: 850px;
     .content {
         height: 80px;
-        padding: 15px 20px;
+        padding: 15px 0;
         position: relative;
 
         .title {
@@ -38,7 +47,7 @@ export default {
             cursor: pointer;
 
             &:hover {
-                color: #FFB400;
+                color: #ffb400;
             }
         }
 
@@ -56,20 +65,19 @@ export default {
             span {
                 padding: 5px 10px;
                 font-size: 12px;
-                color: #0099CC;
+                color: #0099cc;
             }
         }
     }
     .pics {
         height: 120px;
-        padding: 0 20px;
 
         .pic {
             display: inline-block;
             height: 100px;
             width: 100px;
             margin-right: 20px;
-            background: #E0E0E0;
+            background: #e0e0e0;
 
             img {
                 height: 100px;
@@ -77,10 +85,19 @@ export default {
             }
         }
     }
+    .footer {
+        position: relative;
+        span {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            color: #888;
+            font-size: 12px;
+        }
+    }
     hr {
         border: none;
-        border-top: 1px solid #E0E0E0;
+        border-top: 1px solid #e0e0e0;
     }
-
 }
 </style>
