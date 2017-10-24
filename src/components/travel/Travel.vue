@@ -4,11 +4,13 @@
             <travel-item v-for="item in travelItems" :data="item" :key="item.key"></travel-item>
         </div>
         <div class="other">
+            <recommend></recommend>
         </div>
     </div>
 </template>
 
 <script>
+import Recommend from '../Recommend.vue'
 import TravelItem from './TravelItem'
 export default {
     data: function() {
@@ -23,7 +25,8 @@ export default {
         })
     },
     components: {
-        TravelItem
+        TravelItem,
+        Recommend
     }
 }
 </script>

@@ -6,6 +6,7 @@ import Main from '@/components/Main'
 const MapPlace = () => import(/* webpackChunkName: "Map" */'@/components/map/MapPlace')
 const MapProvince = () => import(/* webpackChunkName: "Map" */'@/components/map/MapProvince')
 const Travel = () => import(/* webpackChunkName: "Travel" */'@/components/travel/Travel')
+const TravelDetail = () => import(/* webpackChunkName: "Travel" */'@/components/travel/TravelDetail')
 
 Vue.use(Router)
 
@@ -25,5 +26,8 @@ export default new Router({
     }, {
         path: '/travel',
         component: Travel
+    }, {
+        path: '/travel/detail/:key',
+        component: TravelDetail
     }]
 })

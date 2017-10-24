@@ -1,7 +1,11 @@
 <template>
     <div class="travel-item">
         <div class="content">
-            <span class="title">{{data.title}}</span>
+            <span class="title">
+                <router-link :to="getUrl()">
+                   {{data.title}}
+                </router-link>
+            </span>
             <div class="abstract">{{data.abstract}}</div>
             <div class="tags">
                 <span v-for="(t, index) in data.tags" :key="index">{{t}}</span>
@@ -23,6 +27,11 @@
 export default {
     name: 'TravelItem',
     props: ['data'],
+    methods: {
+        getUrl: function() {
+            return '/travel/detail/' + this.data.key
+        }
+    },
     filters: {
         convertTime: function(val) {
             return new Date(val).toLocaleString()
