@@ -19,8 +19,8 @@ export default {
         }
     },
     mounted: function() {
-        this.$http.get('/static/data/travel.json').then(result => {
-            this.travelItems = this.travelItems.concat(result.body.data)
+        this.$getData('/static/data/travel.json').then(data => {
+            this.travelItems = this.travelItems.concat(data)
             this.$emit('loading')
         })
     },

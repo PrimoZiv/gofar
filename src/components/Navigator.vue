@@ -47,7 +47,8 @@ export default {
     },
     computed: {
         activeIndex: function() {
-            return this.$route.path
+            // use main menu
+            return this.$route.path.split('/').slice(0, 2).join('/')
         }
     },
     methods: {

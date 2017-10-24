@@ -7,10 +7,12 @@ import 'element-ui/lib/theme-chalk/index.css'
 import App from './App'
 import router from './router'
 import VueResource from 'vue-resource'
+import fetchData from './plugins/fetch'
 
 Vue.config.productionTip = false
 Vue.use(VueResource)
 Vue.use(ElementUI)
+Vue.use(fetchData)
 
 /* eslint-disable no-new */
 new Vue({

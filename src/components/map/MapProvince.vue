@@ -59,8 +59,8 @@ export default {
         }
     },
     mounted: function() {
-        this.$http.get('/static/data/footprint.json').then(result => {
-            this.option.series[0].data = result.body.data
+        this.$getData('/static/data/footprint.json').then(data => {
+            this.option.series[0].data = data
             this.$set(this.option.series, 0, this.option.series[0])
             this.$emit('loading')
         })

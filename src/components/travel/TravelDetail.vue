@@ -16,19 +16,12 @@ export default {
     data() {
         return {
             content: '',
-            key: this.$route.params.key
+            key: parseInt(this.$route.params.key, 10)
         }
     },
     mounted: function() {
-        let articles
-        this.$http.get('/static/data/articles.json').then(data => {
-            articles = data.body.data
-            for (let article of articles) {
-                if (parseInt(this.key, 10) === article.key) {
-                    this.content = article.content
-                    break
-                }
-            }
+        this.$getData('/static/data/articles.json', {key: this.key}).then((data) => {
+            this.content = data.content
         })
     },
     components: {
@@ -43,6 +36,7 @@ export default {
 
     .traveldetail_content {
         width: 850px;
+        display: inline-block;
     }
     .other {
         width: 300px;
