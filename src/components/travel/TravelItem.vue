@@ -55,8 +55,15 @@ export default {
             line-height: 30px;
             cursor: pointer;
 
-            &:hover {
-                color: #ffb400;
+            a {
+                &:link, &:visited {
+                    color: #000;
+                    text-decoration: none;
+                }
+                &:hover, &:active {
+                    color: #ffb400;
+                    text-decoration: underline;
+                }
             }
         }
 
