@@ -11,29 +11,21 @@
             <el-row :gutter="30">
                 <el-col :span="8">
                     <el-card>
-                        <div slot="header">Something.</div>
-                        <div>Something else.</div>
-                        <div>Something else.</div>
-                        <div>Something else.</div>
-                        <div>Something else.</div>
+                        <div slot="header">Map</div>
+                        <div><router-link to="/map-place">地点图</router-link></div>
+                        <div><router-link to="/map-province">省份图</router-link></div>
                     </el-card>
                 </el-col>
                 <el-col :span="8">
                     <el-card>
-                        <div slot="header">Something.</div>
-                        <div>Something else.</div>
-                        <div>Something else.</div>
-                        <div>Something else.</div>
-                        <div>Something else.</div>
+                        <div slot="header"><router-link to="/travel">Travel</router-link></div>
+                        <div><router-link to="/travel/detail/0">成都</router-link></div>
+                        <div><router-link to="/travel/detail/1">厦门</router-link></div>
                     </el-card>
                 </el-col>
                 <el-col :span="8">
                     <el-card>
-                        <div slot="header">Something.</div>
-                        <div>Something else.</div>
-                        <div>Something else.</div>
-                        <div>Something else.</div>
-                        <div>Something else.</div>
+                        <div slot="header">Problems</div>
                     </el-card>
                 </el-col>
             </el-row>
@@ -71,5 +63,16 @@ export default {
 
 .types {
     margin-top: 70px;
+
+    a {
+        &:link, &:visited {
+            color: #000;
+            text-decoration: none;
+        }
+        &:hover, &:active {
+            color: #0099CC;
+            text-decoration: underline;
+        }
+    }
 }
 </style>
