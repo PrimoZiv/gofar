@@ -1,16 +1,26 @@
 <template>
     <div>
-        Problem Detail of {{key}}.
+        <markdown :content="content"></markdown>
     </div>
 </template>
 
 <script>
+import Markdown from '../Markdown'
 export default {
     name: 'ProblemDetail',
     data() {
         return {
-            key: parseInt(this.$route.params.key, 10)
+            content: '',
+            key: this.$route.params.key
         }
+    },
+    mounted () {
+        this.$http.get('/static/articles/' + this.key + '.md').then(res => {
+            this.content = res.body
+        })
+    },
+    components: {
+        Markdown
     }
 }
 </script>

@@ -106,7 +106,7 @@ module.exports = function(content) {
                 result += '<h1>' + inlineHandle(row.replace(/^[#]+[\s]*/, '')) + '</h1>'
             }
         } else if (!codeTag) {
-            result += inlineHandle(row)
+            result += '<p>' + inlineHandle(row) + '</p>'
         }
 
         if (codeTag) {
