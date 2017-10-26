@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="problem-item">
         <router-link :to="getUrl()">{{data.title}}</router-link>
     </div>
 </template>
@@ -17,14 +17,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-a {
-    &:link, &:visited {
-        color: #000;
-        text-decoration: none;
-    }
-    &:hover, &:active {
-        color: #ffb400;
-        text-decoration: underline;
+.problem-item {
+    padding: 10px;
+    font-size: 18px;
+
+    a {
+        &:link, &:visited {
+            color: #000;
+            text-decoration: none;
+        }
+        &:hover, &:active {
+            color: #ffb400;
+            text-decoration: underline;
+        }
     }
 }
 </style>

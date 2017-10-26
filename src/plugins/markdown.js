@@ -45,29 +45,69 @@ module.exports = function(content) {
         }
         return arr.join('')
     }
+    let isList = function(str) {
+        if (/^\s+[-*]\s/.test(str)) {
+            return 'iul'
+        } else if (/^\s+[\d]+\.\s/.test(str)) {
+            return 'iol'
+        } else if (/^[-*]\s/.test(str)) {
+            return 'ul'
+        } else if (/^[\d]+\.\s/.test(str)) {
+            return 'ol'
+        }
+        return false
+    }
+    let listHandle = function(rows, type) {
+        let content = ''
+        let startTag = type === 'ul' ? '<ul>' : '<ol>'
+        let endTag = type === 'ul' ? '</ul>' : '</ol>'
+
+        for (let i = 0, len = rows.length; i < len; i++) {
+            let row = rows[i]
+            if (i === 0) {
+                content += startTag
+            }
+
+            if (/^\s/.test(row)) {
+                let t = isList(row)
+                let j = i + 1
+                let tmpRows = [row.trim()]
+                while (isList(rows[j]) === t) {
+                    tmpRows.push(rows[j].trim())
+                    i = j
+                    j++
+                }
+                console.log(tmpRows)
+                content += listHandle(tmpRows, t.slice(1))
+                tmpRows = []
+            } else {
+                if (type === 'ul') {
+                    content += '<li>' + inlineHandle(row.replace(/^[-*][\s]+/, '')) + '</li>'
+                } else {
+                    content += '<li>' + inlineHandle(row.replace(/^[\d]+\.[\s]+/, '')) + '</li>'
+                }
+            }
+
+            if (i === len - 1) {
+                content += endTag
+            }
+        }
+        console.log(content)
+        return content
+    }
 
     let codeTag = false
     let codeContent = ''
 
-    let ulTag = false
-    let ulClose = false
-    let ulContent = ''
-
-    let olTag = false
-    let olClose = false
-    let olContent = ''
+    let ulRows = []
+    let olRows = []
 
     for (let i = 0, len = rows.length; i < len; i++) {
         let row = rows[i]
 
-        // clear list tag by default.
-        if (ulTag) {
-            ulTag = false
-            ulClose = true
-        }
-        if (olTag) {
-            olTag = false
-            olClose = true
+        if (!/^```/.test(row) && codeTag) {
+            codeContent += row + '<br />'
+            continue
         }
 
         if (/^```/.test(row)) {
@@ -81,12 +121,22 @@ module.exports = function(content) {
                 codeContent = ''
                 continue
             }
-        } else if (/^[-*]\s/.test(row)) {
-            ulTag = true
-            ulClose = false
-        } else if (/^[\d]+\.\s/.test(row)) {
-            olTag = true
-            olClose = false
+        } else if (isList(row) === 'ul' || (isList(row) !== false && isList(row) !== 'ol' && ulRows.length > 0)) {
+            let type = isList(rows[i + 1])
+            ulRows.push(row)
+            if (type === false || type === 'ol') {
+                result += listHandle(ulRows, 'ul')
+                ulRows = []
+            }
+            continue
+        } else if (isList(row) === 'ol' || (isList(row) !== false && isList(row) !== 'ul' && olRows.length > 0)) {
+            let type = isList(rows[i + 1])
+            olRows.push(row)
+            if (type === false || type === 'ul') {
+                result += listHandle(olRows, 'ol')
+                olRows = []
+            }
+            continue
         } else if (/^>\s/.test(row)) {
             result += '<blockquote>' + inlineHandle(row.replace(/^>[\s]+/, '')) + '</blockquote>'
         } else if (/^\*{3}$/.test(row.trim())) {
@@ -107,32 +157,6 @@ module.exports = function(content) {
             }
         } else if (!codeTag) {
             result += '<p>' + inlineHandle(row) + '</p>'
-        }
-
-        if (codeTag) {
-            codeContent += row + '<br />'
-        } else if (ulClose || ulTag) {
-            if (ulTag) {
-                ulContent = ulContent === '' ? '<ul>' : ulContent
-                ulContent += '<li>' + inlineHandle(row.replace(/^[-*][\s]+/, '')) + '</li>'
-            }
-            if (ulClose) {
-                ulContent += '</ul>'
-                result += ulContent
-                ulContent = ''
-                ulClose = false
-            }
-        } else if (olClose || olTag) {
-            if (olTag) {
-                olContent = olContent === '' ? '<ol>' : olContent
-                olContent += '<li>' + inlineHandle(row.replace(/^[\d]+\.[\s]+/, '')) + '</li>'
-            }
-            if (olClose) {
-                olContent += '</ol>'
-                result += olContent
-                olContent = ''
-                olClose = false
-            }
         }
     }
     return result
