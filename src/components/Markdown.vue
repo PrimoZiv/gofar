@@ -3,12 +3,13 @@
 </template>
 
 <script>
+import mark from '../plugins/markdown.js'
 export default {
     name: 'Markdown',
     props: ['content'],
     computed: {
         beautify: function() {
-            return '<h1>' + this.content + '</h1>'
+            return mark(this.content)
         }
     }
 }
