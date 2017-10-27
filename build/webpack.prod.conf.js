@@ -77,7 +77,7 @@ const webpackConfig = merge(baseWebpackConfig, {
             resource &&
             resource.includes('node_modules') &&
             /\.js$/.test(resource)
-        ),
+        )
     }),
     // split vendor js into its own file
     new webpack.optimize.CommonsChunkPlugin({

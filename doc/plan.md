@@ -1,5 +1,6 @@
 ## Current
 
+- Simplify ElementUI or use iView.
 - Use vuex to manage state.
 
 ## History

@@ -4,8 +4,18 @@
 
 <script>
 import mark from '../plugins/markdown.js'
-import hl from 'highlight.js'
+import hl from 'highlight.js/lib/highlight.js'
 import 'highlight.js/styles/atom-one-dark.css'
+
+// import part of languages
+hl.registerLanguage('json', require('highlight.js/lib/languages/json'))
+hl.registerLanguage('javascript', require('highlight.js/lib/languages/javascript'))
+hl.registerLanguage('xml', require('highlight.js/lib/languages/xml'))
+hl.registerLanguage('css', require('highlight.js/lib/languages/css'))
+hl.registerLanguage('scss', require('highlight.js/lib/languages/scss'))
+hl.registerLanguage('php', require('highlight.js/lib/languages/php'))
+hl.registerLanguage('markdown', require('highlight.js/lib/languages/markdown'))
+
 export default {
     name: 'Markdown',
     props: ['content'],
