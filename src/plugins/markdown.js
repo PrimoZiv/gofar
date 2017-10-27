@@ -77,7 +77,6 @@ module.exports = function(content) {
                     i = j
                     j++
                 }
-                console.log(tmpRows)
                 content += listHandle(tmpRows, t.slice(1))
                 tmpRows = []
             } else {
@@ -92,7 +91,6 @@ module.exports = function(content) {
                 content += endTag
             }
         }
-        console.log(content)
         return content
     }
 

@@ -17,8 +17,11 @@ export default {
 
 <style lang="scss">
 .md {
+    width: 800px;
     color: #333;
     font-size: 14px;
+    line-height: 1.6em;
+    box-sizing: border-box;
 
     & h4, & h5, & p, & ul, & ol, & pre, & blockquote, & table {
         margin: 1.5em 0;
@@ -29,11 +32,17 @@ export default {
     ul li, ol li {
         margin: .3em 0;
     }
+    ul ul, ul ol, ol ul, ol ol {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
     pre {
         padding: 1em;
         vertical-align: top;
         background: #f2f2f2;
         overflow-x: auto;
+        line-height: 1.45em;
+        border-radius: 8px;
     }
     span.inline-code, pre {
         font-size: 0.93em;
