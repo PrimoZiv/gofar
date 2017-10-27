@@ -13,7 +13,7 @@
                 <el-menu-item index="/map-province">省份</el-menu-item>
             </el-submenu>
             <el-menu-item index="/travel">游记</el-menu-item>
-            <el-menu-item index="/problems">问题</el-menu-item>
+            <el-menu-item index="/articles">文章</el-menu-item>
 
             <el-row type="flex" :gutter="15" align="middle">
                 <el-col :span="16" :offset="7">

@@ -25,7 +25,7 @@
                 </el-col>
                 <el-col :span="8">
                     <el-card>
-                        <div slot="header">Problems</div>
+                        <div slot="header">Articles</div>
                     </el-card>
                 </el-col>
             </el-row>

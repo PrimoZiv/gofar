@@ -7,15 +7,15 @@
 <script>
 import Markdown from '../Markdown'
 export default {
-    name: 'ProblemDetail',
+    name: 'ArticleDetail',
     data() {
         return {
             content: '',
-            key: this.$route.params.key
+            name: this.$route.params.name
         }
     },
     mounted () {
-        this.$http.get('/static/articles/' + this.key + '.md').then(res => {
+        this.$http.get('/static/articles/' + this.name + '.md').then(res => {
             this.content = res.body
         })
     },

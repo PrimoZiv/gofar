@@ -20,7 +20,7 @@ export default {
         }
     },
     mounted: function() {
-        this.$getData('/static/data/articles.json', {key: this.key}).then((data) => {
+        this.$getData('/static/data/travel-notes.json', {key: this.key}).then((data) => {
             this.content = data.content
         })
     },

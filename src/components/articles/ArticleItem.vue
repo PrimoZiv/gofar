@@ -1,23 +1,23 @@
 <template>
-    <div class="problem-item">
+    <div class="article-item">
         <router-link :to="getUrl()">{{data.title}}</router-link>
     </div>
 </template>
 
 <script>
 export default {
-    name: 'ProblemItem',
+    name: 'ArticleItem',
     props: ['data'],
     methods: {
         getUrl: function() {
-            return '/problems/' + this.data.articleID
+            return '/articles/' + this.data.articleID
         }
     }
 }
 </script>
 
 <style lang="scss" scoped>
-.problem-item {
+.article-item {
     padding: 10px;
     font-size: 18px;
 
