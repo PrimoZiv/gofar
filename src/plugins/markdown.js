@@ -104,17 +104,17 @@ module.exports = function(content) {
         let row = rows[i]
 
         if (!/^```/.test(row) && codeTag) {
-            codeContent += row + '<br />'
+            codeContent += row + '\r\n'
             continue
         }
 
         if (/^```/.test(row)) {
             codeTag = !codeTag
             if (codeTag) {
-                codeContent += '<pre>'
+                codeContent += '<pre><code class="' + row.slice(3) + '">'
                 continue
             } else {
-                codeContent += '</pre>'
+                codeContent += '</code></pre>'
                 result += codeContent
                 codeContent = ''
                 continue

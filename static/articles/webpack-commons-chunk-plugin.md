@@ -12,7 +12,7 @@ CommonsChunkPlugin有中文翻译的文档，但是感觉并不是很通顺，�
 
 首先贴一下文档。
 
-```
+```json
 {
   name: "string",
   names: "string[]",

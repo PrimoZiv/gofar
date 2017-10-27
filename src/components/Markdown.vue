@@ -1,15 +1,30 @@
 <template>
-    <div class="md" v-html="beautify"></div>
+    <div class="md" v-html="beautify" v-highlight></div>
 </template>
 
 <script>
 import mark from '../plugins/markdown.js'
+import hl from 'highlight.js'
+import 'highlight.js/styles/atom-one-dark.css'
 export default {
     name: 'Markdown',
     props: ['content'],
     computed: {
         beautify: function() {
             return mark(this.content)
+        }
+    },
+    directives: {
+        highlight: {
+            update: function(el) {
+                // hl.configure({useBR: true});
+                hl.fixMarkup('<br>')
+                Array.from(el.childNodes).filter(node => {
+                    return node.nodeName === 'PRE'
+                }).map(node => {
+                    hl.highlightBlock(node.childNodes[0])
+                })
+            }
         }
     }
 }
@@ -37,14 +52,13 @@ export default {
         margin-bottom: 0;
     }
     pre {
-        padding: 1em;
         vertical-align: top;
         background: #f2f2f2;
         overflow-x: auto;
         line-height: 1.45em;
-        border-radius: 8px;
+        border-radius: 5px;
     }
-    span.inline-code, pre {
+    span.inline-code, pre code {
         font-size: 0.93em;
         font-family: Consolas,"Lucida Console",monospace;
     }
