@@ -1,4 +1,3 @@
-import {isArray} from 'lodash'
 export default {
     install: function(Vue, options) {
         Vue.prototype.$getData = function(url, filter) {
@@ -10,13 +9,13 @@ export default {
                     if (filter.key !== undefined) {
                         let tempData = []
                         for (let i of res.body.data) {
-                            if (i.key === filter.key || (isArray(filter.key) && filter.key.includes(i.key))) {
+                            if (i.key === filter.key || (Array.isArray(filter.key) && filter.key.includes(i.key))) {
                                 tempData.push(i)
                             }
                         }
-                        data = isArray(filter.key) ? tempData : tempData[0]
+                        data = Array.isArray(filter.key) ? tempData : tempData[0]
                     } else if (filter.index !== undefined) {
-                        if (isArray(filter.index)) {
+                        if (Array.isArray(filter.index)) {
                             data = data.res.body.data.slice(filter.index[0], filter.index[1])
                         } else {
                             data = res.body.data[filter.index]
