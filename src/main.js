@@ -8,6 +8,7 @@ import router from './router'
 import VueResource from 'vue-resource'
 import fetchData from './plugins/fetch'
 import {
+    Tag,
     Menu,
     Submenu,
     MenuItem,
@@ -29,6 +30,7 @@ Vue.config.productionTip = false
 Vue.use(VueResource)
 Vue.use(fetchData)
 
+Vue.use(Tag)
 Vue.use(Menu)
 Vue.use(Submenu)
 Vue.use(MenuItem)

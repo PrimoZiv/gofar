@@ -41,8 +41,9 @@ export default {
 </script>
 
 <style lang="scss">
+$width: 800px;
 .md {
-    width: 800px;
+    width: $width;
     color: #333;
     font-size: 14px;
     line-height: 1.6em;
@@ -73,6 +74,8 @@ export default {
     }
     img {
         vertical-align: bottom;
+        box-shadow: 0 0 20px 0 #666;
+        max-width: $width;
     }
     pre {
         vertical-align: top;
@@ -80,6 +83,10 @@ export default {
         overflow-x: auto;
         line-height: 1.45em;
         border-radius: 5px;
+
+        code {
+            padding: 1em;
+        }
     }
     span.inline-code, pre code {
         font-size: 0.93em;

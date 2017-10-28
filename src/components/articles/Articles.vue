@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="article-list">
         <article-item v-for="p in articles" :key="p.key" :data="p"></article-item>
     </div>
 </template>
@@ -24,6 +24,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.article-list {
+    width: 850px;
+}
 </style>
