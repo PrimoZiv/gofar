@@ -5,7 +5,7 @@
 ##### h5
 ###### h6
 
-Link: [LICENSE](https://github.com/PrimoZiv/gofar/blob/dev/LICENSE) and Picture: ![Icon](/static/articles/markdown-syntax/favicon.ico)
+Picture: ![Icon](/static/articles/markdown-syntax/favicon.ico) and Link: [LICENSE](https://github.com/PrimoZiv/gofar/blob/dev/LICENSE)
 
 ```
 let a = 0;
