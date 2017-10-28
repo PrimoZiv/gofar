@@ -6,8 +6,10 @@
 ### 注释识别有误？
 
 我在配置好代码后，运行应用发现代码中只要出现了单行注释`//`之后，其他行全部被识别成了注释，如下图：
+![Pic 1](/static/articles/highlight-practice/article1.png)
 
 查看DOM，缺失都被加上了`hljs-comment`类
+![Pic 2](/static/articles/highlight-practice/article2.png)
 
 之后去查阅了官方文档，发现并没有相关的配置表示使用什么作为行分隔符。然后意识到如果没有说明的话应该是默认的换行符。
 而我之前在解析`md`文件后，在每一行末尾插入了一个`&lt;br&gt;`，而没有使用换行符。
