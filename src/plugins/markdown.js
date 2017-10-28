@@ -9,6 +9,16 @@ module.exports = function(content) {
         let arr = str.split('`')
         for (let i = 0, len = arr.length; i < len; i++) {
             if (i % 2 === 0) {
+                if (/\[[^[\]]+\]\([^()]+\)/.test(arr[i])) {
+                    arr[i] = arr[i].replace(/\[([^[\]]+)\]\(([^()]+)\)/, function(all, m1, m2) {
+                        return '<a href="' + m2 + '">' + m1 + '</a>'
+                    })
+                }
+                if (/!\[[^[\]]+\]\([^()]+\)/.test(arr[i])) {
+                    arr[i] = arr[i].replace(/!\[([^[\]]+)\]\(([^()]+)\)/, function(all, m1, m2) {
+                        return '<img src="' + m2 + '" alt="' + m1 + '">'
+                    })
+                }
                 boldCount += arr[i].match(/\*\*/g) ? arr[i].match(/\*\*/g).length : 0
             }
             if (i % 2 === 1) {

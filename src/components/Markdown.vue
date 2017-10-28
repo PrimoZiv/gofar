@@ -61,6 +61,19 @@ export default {
         margin-top: 0;
         margin-bottom: 0;
     }
+    a {
+        &:link, &:visited {
+            color: #006485;
+            text-decoration: underline;
+        }
+        &:hover, &:active {
+            color: #0099CC;
+            text-decoration: underline;
+        }
+    }
+    img {
+        vertical-align: bottom;
+    }
     pre {
         vertical-align: top;
         background: #f2f2f2;

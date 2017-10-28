@@ -5,6 +5,8 @@
 ##### h5
 ###### h6
 
+Link: [LICENSE](https://github.com/PrimoZiv/gofar/blob/dev/LICENSE) and Picture: ![Icon](/static/articles/markdown-syntax/favicon.ico)
+
 ```
 let a = 0;
 a++
