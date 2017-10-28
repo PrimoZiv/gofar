@@ -8,5 +8,9 @@
         "key": 1,
         "articleID": "webpack-commons-chunk-plugin",
         "title": "Webpack CommonsChunkPlugin 理解"
+    }, {
+        "key": 2,
+        "articleID": "highlight-practice",
+        "title": "highlight.js实践"
     }]
 }
