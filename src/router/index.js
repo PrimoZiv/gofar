@@ -8,6 +8,7 @@ const MapProvince = () => import(/* webpackChunkName: "Map" */'@/components/map/
 const Travel = () => import(/* webpackChunkName: "Travel" */'@/components/travel/Travel')
 const TravelDetail = () => import(/* webpackChunkName: "Travel" */'@/components/travel/TravelDetail')
 const Articles = () => import(/* webpackChunkName: "Article" */'@/components/articles/Articles')
+const Notes = () => import(/* webpackChunkName: "Article" */'@/components/articles/Notes')
 const ArticleDetail = () => import(/* webpackChunkName: "Article" */'@/components/articles/ArticleDetail')
 
 Vue.use(Router)
@@ -32,10 +33,13 @@ export default new Router({
         path: '/travel/:key',
         component: TravelDetail
     }, {
+        path: '/notes',
+        component: Notes
+    }, {
         path: '/articles',
         component: Articles
     }, {
-        path: '/articles/:name',
+        path: '/:dir/:name',
         component: ArticleDetail
     }]
 })

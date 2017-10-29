@@ -8,10 +8,10 @@
 <script>
 export default {
     name: 'ArticleItem',
-    props: ['data'],
+    props: ['data', 'dir'],
     methods: {
         getUrl: function() {
-            return '/articles/' + this.data.articleID
+            return '/' + this.dir + '/' + this.data.articleID
         }
     },
     filters: {
