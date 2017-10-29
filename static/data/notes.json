@@ -2,18 +2,8 @@
     "name": "notes",
     "data": [{
         "key": 0,
-        "articleID": "markdown-syntax",
-        "title": "Markdown 语法",
-        "time": 1508591063069
-    }, {
-        "key": 1,
-        "articleID": "webpack-commons-chunk-plugin",
-        "title": "Webpack CommonsChunkPlugin 理解",
-        "time": 1508591063069
-    }, {
-        "key": 2,
-        "articleID": "highlight-practice",
-        "title": "highlight.js实践",
-        "time": 1509169426650
+        "articleID": "the-little-prince",
+        "title": "The Little Prince",
+        "time": 1509282906677
     }]
 }

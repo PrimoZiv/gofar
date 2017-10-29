@@ -1,11 +1,11 @@
 <template>
     <div class="note-list">
-        <article-item v-for="n in notes" :key="n.key" :data="n"></article-item>
+        <article-item v-for="n in notes" :key="n.key" :data="n" dir="notes"></article-item>
     </div>
 </template>
 
 <script>
-import ArticleItem from '../articles/ArticleItem'
+import ArticleItem from './ArticleItem'
 export default {
     name: 'Notes',
     data () {

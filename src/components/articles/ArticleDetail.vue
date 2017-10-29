@@ -11,11 +11,12 @@ export default {
     data() {
         return {
             content: '',
+            dir: this.$route.params.dir,
             name: this.$route.params.name
         }
     },
     mounted () {
-        this.$http.get('/static/articles/' + this.name + '/' + this.name + '.md').then(res => {
+        this.$http.get('/static/' + this.dir + '/' + this.name + '/' + this.name + '.md').then(res => {
             this.content = res.body
         })
     },

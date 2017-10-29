@@ -12,8 +12,8 @@
                 <el-col :span="8">
                     <el-card>
                         <div slot="header">Travel</div>
-                        <div class="card__item" v-for="n in notes" :key="n.key">
-                            <router-link :to="getUrl('travel', n.key)">{{n.title}}</router-link>
+                        <div class="card__item" v-for="t in travel" :key="t.key">
+                            <router-link :to="getUrl('travel', t.key)">{{t.title}}</router-link>
                         </div>
                     </el-card>
                 </el-col>
@@ -27,9 +27,10 @@
                 </el-col>
                 <el-col :span="8">
                     <el-card>
-                        <div slot="header">Map</div>
-                        <div class="card__item"><router-link to="/map-place">地点图</router-link></div>
-                        <div class="card__item"><router-link to="/map-province">省份图</router-link></div>
+                        <div slot="header">Notes</div>
+                        <div class="card__item" v-for="n in notes" :key="n.key">
+                            <router-link :to="getUrl('notes', n.articleID)">{{n.title}}</router-link>
+                        </div>
                     </el-card>
                 </el-col>
             </el-row>
@@ -42,6 +43,7 @@ export default {
     name: 'Main',
     data () {
         return {
+            travel: [],
             notes: [],
             articles: []
         }
@@ -53,11 +55,17 @@ export default {
             }).slice(0, 5)
             this.articles = this.articles.concat(articles)
         })
-        this.$getData('/static/data/travel.json').then(data => {
+        this.$getData('/static/data/notes.json').then(data => {
             let notes = data.sort((a1, a2) => {
                 return a1.time - a2.time
             }).slice(0, 5)
             this.notes = this.notes.concat(notes)
+        })
+        this.$getData('/static/data/travel.json').then(data => {
+            let travel = data.sort((a1, a2) => {
+                return a1.time - a2.time
+            }).slice(0, 5)
+            this.travel = this.travel.concat(travel)
         })
     },
     methods: {
