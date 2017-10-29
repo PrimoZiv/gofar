@@ -10,6 +10,7 @@
                     :router="true">
                     <el-menu-item index="/">首页</el-menu-item>
                     <el-menu-item index="/travel">游记</el-menu-item>
+                    <el-menu-item index="/notes">笔记</el-menu-item>
                     <el-menu-item index="/articles">文章</el-menu-item>
                 </el-menu>
             </el-col>

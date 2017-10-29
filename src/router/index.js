@@ -9,6 +9,8 @@ const Travel = () => import(/* webpackChunkName: "Travel" */'@/components/travel
 const TravelDetail = () => import(/* webpackChunkName: "Travel" */'@/components/travel/TravelDetail')
 const Articles = () => import(/* webpackChunkName: "Article" */'@/components/articles/Articles')
 const ArticleDetail = () => import(/* webpackChunkName: "Article" */'@/components/articles/ArticleDetail')
+const Notes = () => import(/* webpackChunkName: "Article" */'@/components/notes/Notes')
+// const NoteDetail = () => import(/* webpackChunkName: "Article" */'@/components/notes/NoteDetail')
 
 Vue.use(Router)
 
@@ -31,6 +33,12 @@ export default new Router({
     }, {
         path: '/travel/:key',
         component: TravelDetail
+    }, {
+        path: '/notes',
+        component: Notes
+    // }, {
+    //     path: '/notes/:name',
+    //     component: NoteDetail
     }, {
         path: '/articles',
         component: Articles
