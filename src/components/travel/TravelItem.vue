@@ -29,7 +29,7 @@ export default {
     props: ['data'],
     methods: {
         getUrl: function() {
-            return '/travel/detail/' + this.data.key
+            return '/travel/' + this.data.key
         }
     },
     filters: {

@@ -29,7 +29,7 @@ export default new Router({
         path: '/travel',
         component: Travel
     }, {
-        path: '/travel/detail/:key',
+        path: '/travel/:key',
         component: TravelDetail
     }, {
         path: '/articles',

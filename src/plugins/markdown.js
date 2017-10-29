@@ -9,11 +9,13 @@ module.exports = function(content) {
         let arr = str.split('`')
         for (let i = 0, len = arr.length; i < len; i++) {
             if (i % 2 === 0) {
+                // image
                 if (/!\[[^[\]]+\]\([^()]+\)/g.test(arr[i])) {
                     arr[i] = arr[i].replace(/!\[([^[\]]+)\]\(([^()]+)\)/, function(all, m1, m2) {
                         return '<img src="' + m2 + '" alt="' + m1 + '">'
                     })
                 }
+                // link
                 if (/\[[^[\]]+\]\([^()]+\)/g.test(arr[i])) {
                     arr[i] = arr[i].replace(/\[([^[\]]+)\]\(([^()]+)\)/, function(all, m1, m2) {
                         return '<a href="' + m2 + '">' + m1 + '</a>'
@@ -22,12 +24,14 @@ module.exports = function(content) {
                 boldCount += arr[i].match(/\*\*/g) ? arr[i].match(/\*\*/g).length : 0
             }
             if (i % 2 === 1) {
+                // inline code
                 arr[i] = '<span class="inline-code">' + arr[i] + '</span>'
             }
         }
         boldCount = (boldCount % 2 === 1) ? (boldCount - 1) : boldCount
         for (let i = 0, len = arr.length; i < len; i++) {
             if (i % 2 === 0 && boldCount > 0) {
+                // bold
                 while (arr[i].match(/\*\*/) && boldCount > 0) {
                     if (boldCount % 2 === 0) {
                         arr[i] = arr[i].replace(/\*\*/, '<strong>')
@@ -44,6 +48,7 @@ module.exports = function(content) {
         for (let i = 0, len = arr.length; i < len; i++) {
             if (i % 2 === 0 && italicCount > 0) {
                 while (arr[i].match(/\*/) && italicCount > 0) {
+                    // Italic
                     if (italicCount % 2 === 0) {
                         arr[i] = arr[i].replace(/\*/, '<em>')
                     } else {
@@ -91,8 +96,10 @@ module.exports = function(content) {
                 tmpRows = []
             } else {
                 if (type === 'ul') {
+                    // ul
                     content += '<li>' + inlineHandle(row.replace(/^[-*][\s]+/, '')) + '</li>'
                 } else {
+                    // ol
                     content += '<li>' + inlineHandle(row.replace(/^[\d]+\.[\s]+/, '')) + '</li>'
                 }
             }
@@ -119,6 +126,7 @@ module.exports = function(content) {
         }
 
         if (/^```/.test(row)) {
+            // code
             codeTag = !codeTag
             if (codeTag) {
                 codeContent += '<pre><code class="' + row.slice(3) + '">'
@@ -146,10 +154,13 @@ module.exports = function(content) {
             }
             continue
         } else if (/^>\s/.test(row)) {
+            // quote
             result += '<blockquote>' + inlineHandle(row.replace(/^>[\s]+/, '')) + '</blockquote>'
         } else if (/^\*{3}$/.test(row.trim())) {
+            // hr
             result += '<hr />'
         } else if (/^#/.test(row)) {
+            // title
             if (/^######/.test(row)) {
                 result += '<h6>' + inlineHandle(row.replace(/^[#]+[\s]*/, '')) + '</h6>'
             } else if (/^#####/.test(row)) {
@@ -164,6 +175,7 @@ module.exports = function(content) {
                 result += '<h1>' + inlineHandle(row.replace(/^[#]+[\s]*/, '')) + '</h1>'
             }
         } else if (!codeTag) {
+            // paragraph
             result += '<p>' + inlineHandle(row) + '</p>'
         }
     }
