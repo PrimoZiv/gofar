@@ -25,7 +25,14 @@ module.exports = function(content) {
             }
             if (i % 2 === 1) {
                 // inline code
-                arr[i] = '<span class="inline-code">' + arr[i] + '</span>'
+                arr[i] = '<span class="inline-code">' + arr[i].replace(/([<>])/g, (r) => {
+                    if (r === '<') {
+                        return '&lt;'
+                    } else if (r === '>') {
+                        return '&gt;'
+                    }
+                    return r
+                }) + '</span>'
             }
         }
         boldCount = (boldCount % 2 === 1) ? (boldCount - 1) : boldCount
