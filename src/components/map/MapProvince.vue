@@ -12,7 +12,7 @@ export default {
         return {
             option: {
                 title: {
-                    text: '那些我曾去过的地方',
+                    text: '',
                     left: 'center',
                     textStyle: {
                         color: '#333',
