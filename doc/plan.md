@@ -1,5 +1,6 @@
 ## Current
 
+- Fix markdown "code": <br> can't show and too long.
 - Use vuex to manage state.
 - Design Black House.
 
