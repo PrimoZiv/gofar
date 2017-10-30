@@ -83,6 +83,8 @@ $width: 800px;
         overflow-x: auto;
         line-height: 1.45em;
         border-radius: 5px;
+        max-height: 450px;
+        overflow-y: auto;
 
         code {
             padding: 1em;

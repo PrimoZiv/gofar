@@ -128,7 +128,9 @@ module.exports = function(content) {
         let row = rows[i]
 
         if (!/^```/.test(row) && codeTag) {
-            codeContent += row + '\r\n'
+            codeContent += row.replace(/[<>]/, (d) => {
+                return d === '<' ? '&lt;' : '&gt;'
+            }) + '\r\n'
             continue
         }
 
