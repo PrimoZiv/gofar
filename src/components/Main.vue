@@ -1,37 +1,15 @@
 <template>
     <div>
-        <div class="photos">
-            <el-carousel :interval="4000" type="card" height="300px">
-                <el-carousel-item v-for="item in 5" :key="item">
-                    <h3></h3>
-                </el-carousel-item>
-            </el-carousel>
-        </div>
         <div class="types">
             <el-row :gutter="30">
-                <el-col :span="8">
-                    <el-card>
-                        <div slot="header">Travel</div>
-                        <div class="card__item" v-for="t in travel" :key="t.key">
-                            <router-link :to="getUrl('travel', t.key)">{{t.title}}</router-link>
-                        </div>
-                    </el-card>
-                </el-col>
-                <el-col :span="8">
-                    <el-card>
-                        <div slot="header">Articles</div>
-                        <div class="card__item" v-for="a in articles" :key="a.key">
-                            <router-link :to="getUrl('articles', a.articleID)">{{a.title}}</router-link>
-                        </div>
-                    </el-card>
-                </el-col>
-                <el-col :span="8">
-                    <el-card>
-                        <div slot="header">Notes</div>
-                        <div class="card__item" v-for="n in notes" :key="n.key">
-                            <router-link :to="getUrl('notes', n.articleID)">{{n.title}}</router-link>
-                        </div>
-                    </el-card>
+                <el-col v-for="t in items" :key="t.id">
+                    <div>
+                        <span>[{{t.typeName}}]: </span>
+                        <router-link :to="getUrl(t.type, t.type === 'travel' ? t.key : t.articleID)">{{t.title}}</router-link>
+                        <span v-if="t.tags && t.tags.length">
+                            <el-tag size="mini" type="success" v-for="(v, i) in t.tags" :key="i">{{v}}</el-tag>
+                        </span>
+                    </div>
                 </el-col>
             </el-row>
         </div>
@@ -43,29 +21,36 @@ export default {
     name: 'Main',
     data () {
         return {
+            items: [],
             travel: [],
             notes: [],
             articles: []
         }
     },
     mounted: function() {
-        this.$getData('/static/data/articles.json').then(data => {
-            let articles = data.sort((a1, a2) => {
-                return a1.time - a2.time
-            }).slice(0, 5)
-            this.articles = this.articles.concat(articles)
-        })
-        this.$getData('/static/data/notes.json').then(data => {
-            let notes = data.sort((a1, a2) => {
-                return a1.time - a2.time
-            }).slice(0, 5)
-            this.notes = this.notes.concat(notes)
-        })
-        this.$getData('/static/data/travel.json').then(data => {
-            let travel = data.sort((a1, a2) => {
-                return a1.time - a2.time
-            }).slice(0, 5)
-            this.travel = this.travel.concat(travel)
+        Promise.all([
+            this.$getData('/static/data/articles.json'),
+            this.$getData('/static/data/notes.json'),
+            this.$getData('/static/data/travel.json')
+        ]).then(data => {
+            data[0].map(v => {
+                v.type = 'articles'
+                v.typeName = '文章'
+                v.id = v.type + v.key
+            })
+            data[1].map(v => {
+                v.type = 'notes'
+                v.typeName = '笔记'
+                v.id = v.type + v.key
+            })
+            data[2].map(v => {
+                v.type = 'travel'
+                v.typeName = '游记'
+                v.id = v.type + v.key
+            })
+            this.items = [...data[0], ...data[1], ...data[2]].sort((a1, a2) => {
+                return a2.time - a1.time
+            })
         })
     },
     methods: {
@@ -77,29 +62,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.el-carousel {
-    .el-carousel__item--card:nth-child(3) {
-        background: url(../assets/carousel1.jpg);
-    }
-    .el-carousel__item--card:nth-child(4) {
-        background: url(../assets/carousel2.jpg);
-    }
-    .el-carousel__item--card:nth-child(5) {
-        background: url(../assets/carousel3.jpg);
-    }
-    .el-carousel__item--card:nth-child(6) {
-        background: url(../assets/carousel4.jpg);
-    }
-    .el-carousel__item--card:nth-child(7) {
-        background: url(../assets/carousel5.jpg);
-    }
-}
 
 .types {
-    margin-top: 70px;
-
-    .card__item {
-        padding: 3px 0;
+    .el-col {
+        padding: 10px 0;
     }
 
     a {
@@ -111,6 +77,10 @@ export default {
             color: #0099CC;
             text-decoration: underline;
         }
+    }
+
+    .el-tag {
+        margin-right: 5px;
     }
 }
 </style>
