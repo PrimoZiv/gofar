@@ -20,7 +20,9 @@ export default {
     },
     mounted: function() {
         this.$getData('/static/data/travel.json').then(data => {
-            this.travelItems = this.travelItems.concat(data)
+            this.travelItems = this.travelItems.concat(data).sort((a1, a2) => {
+                return a2.time - a1.time
+            })
             this.$emit('loading')
         })
     },
