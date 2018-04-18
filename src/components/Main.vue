@@ -30,8 +30,7 @@ export default {
     mounted: function() {
         Promise.all([
             this.$getData('/static/data/articles.json'),
-            this.$getData('/static/data/notes.json'),
-            this.$getData('/static/data/travel.json')
+            this.$getData('/static/data/notes.json')
         ]).then(data => {
             data[0].map(v => {
                 v.type = 'articles'
@@ -43,12 +42,7 @@ export default {
                 v.typeName = '笔记'
                 v.id = v.type + v.key
             })
-            data[2].map(v => {
-                v.type = 'travel'
-                v.typeName = '游记'
-                v.id = v.type + v.key
-            })
-            this.items = [...data[0], ...data[1], ...data[2]].sort((a1, a2) => {
+            this.items = [...data[0], ...data[1]].sort((a1, a2) => {
                 return a2.time - a1.time
             })
         })

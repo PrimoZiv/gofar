@@ -5,8 +5,6 @@ import Main from '@/components/Main'
 // Async load component.
 const MapPlace = () => import(/* webpackChunkName: "Map" */'@/components/map/MapPlace')
 const MapProvince = () => import(/* webpackChunkName: "Map" */'@/components/map/MapProvince')
-const Travel = () => import(/* webpackChunkName: "Travel" */'@/components/travel/Travel')
-const TravelDetail = () => import(/* webpackChunkName: "Travel" */'@/components/travel/TravelDetail')
 const Articles = () => import(/* webpackChunkName: "Article" */'@/components/articles/Articles')
 const Notes = () => import(/* webpackChunkName: "Article" */'@/components/articles/Notes')
 const ArticleDetail = () => import(/* webpackChunkName: "Article" */'@/components/articles/ArticleDetail')
@@ -26,12 +24,6 @@ export default new Router({
         path: '/map-province',
         name: 'MapProvince',
         component: MapProvince
-    }, {
-        path: '/travel',
-        component: Travel
-    }, {
-        path: '/travel/:key',
-        component: TravelDetail
     }, {
         path: '/notes',
         component: Notes
