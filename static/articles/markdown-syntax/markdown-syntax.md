@@ -17,7 +17,7 @@ if (a) {
 - ul list 1
 * ul list 2
 
- ***
+***
 
 * ul **list 2-1**
 - ul list 2-2 `code`

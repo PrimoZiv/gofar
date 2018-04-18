@@ -15,7 +15,9 @@ export default {
     },
     mounted () {
         this.$getData('/static/data/notes.json').then(data => {
-            this.notes = this.notes.concat(data)
+            this.notes = this.notes.concat(data).sort((a1, a2) => {
+                return a2.time - a1.time
+            })
         })
     },
     components: {

@@ -165,7 +165,7 @@ module.exports = function(content) {
         } else if (/^>\s/.test(row)) {
             // quote
             result += '<blockquote>' + inlineHandle(row.replace(/^>[\s]+/, '')) + '</blockquote>'
-        } else if (/^\*{3}$/.test(row.trim())) {
+        } else if (/^(\*{3,}|-{3,})$/.test(row.trim())) {
             // hr
             result += '<hr />'
         } else if (/^#/.test(row)) {
