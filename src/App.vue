@@ -1,11 +1,13 @@
 <template>
-    <div id="app">
-        <Navigator></Navigator>
-        <div class="content" v-loading="isLoading">
-            <router-view/>
+        <div id="app">
+            <Navigator></Navigator>
+            <div class="content" v-loading="isLoading">
+                <transition name="router" mode="out-in">
+                    <router-view/>
+                </transition>
+            </div>
+            <FarFooter></FarFooter>
         </div>
-        <FarFooter></FarFooter>
-    </div>
 </template>
 
 <script>
@@ -51,5 +53,16 @@ export default {
     &>.content {
         padding-top: 50px;
     }
+}
+.router-enter {
+    opacity: 0;
+    transform: translateX(100px);
+}
+.router-leave {
+    opacity: 0;
+    transform: translateX(-100px);
+}
+.router-enter-active, .router-leave-active {
+    transition: all ease 0.5s;
 }
 </style>
