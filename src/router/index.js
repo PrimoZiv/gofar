@@ -8,6 +8,7 @@ const MapProvince = () => import(/* webpackChunkName: "Map" */'@/components/map/
 const Articles = () => import(/* webpackChunkName: "Article" */'@/components/articles/Articles')
 const Notes = () => import(/* webpackChunkName: "Article" */'@/components/articles/Notes')
 const ArticleDetail = () => import(/* webpackChunkName: "Article" */'@/components/articles/ArticleDetail')
+const GoPhoto = () => import(/* webpackChunkName: "Album" */'@/components/album/GoPhoto')
 
 Vue.use(Router)
 
@@ -33,5 +34,9 @@ export default new Router({
     }, {
         path: '/:dir/:name',
         component: ArticleDetail
+    }, {
+        path: '/album',
+        name: 'GoPhoto',
+        component: GoPhoto
     }]
 })

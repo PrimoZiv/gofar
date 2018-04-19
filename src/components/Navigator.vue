@@ -11,6 +11,7 @@
                     <el-menu-item index="/">首页</el-menu-item>
                     <el-menu-item index="/notes">笔记</el-menu-item>
                     <el-menu-item index="/articles">文章</el-menu-item>
+                    <el-menu-item index="/album">相册</el-menu-item>
                 </el-menu>
             </el-col>
             <el-col :span="2">
