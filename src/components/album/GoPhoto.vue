@@ -120,10 +120,10 @@ body {
 }
 .photo-switch-enter, .photo-switch-leave-to {
     opacity: 0.4;
-    transform: translateX(100%);
+    transform: translateX(-100%);
 }
 .photo-switch-leave {
-    transform: translateX(-100%);
+    transform: translateX(100%);
 }
 .photo-switch-enter-active, .photo-switch-leave-active {
     position: absolute;
