@@ -3,7 +3,8 @@
         <transition-group name="photo-switch">
             <div class="back-photo" v-for="(p, i) in photos" :key="p.key" 
                 :style="{backgroundImage: 'url('+p.image+')'}"
-                v-show="i === activePhoto">
+                v-show="i === activePhoto"
+                :class="{'active': i === activePhoto}">
                 <div class="photo-mask">
                     <div class="photo-content">
                         <h3>{{p.title}}</h3>
@@ -14,16 +15,17 @@
             </div>
         </transition-group>
         <div class="close-btn-wrap">
-            <button @click="backToBlog">Close</button>
+            <line-button type="menu" @click.native="backToBlog"></line-button>
         </div>
         <div class="photo-btn-wrap">
-            <button @click="activePrev">Prev</button>
-            <button @click="activeNext">Next</button>
+            <line-button type="prev" @click.native="activePrev"></line-button>
+            <line-button type="next" @click.native="activeNext"></line-button>
         </div>
     </div>
 </template>
 
 <script>
+import LineButton from '../LineButton'
 export default {
     data () {
         return {
@@ -34,10 +36,6 @@ export default {
     mounted () {
         this.$getData('/static/data/album.json').then(data => {
             this.photos = this.photos.concat(data)
-            // this.photos.forEach(p => {
-            //     p.image = '/static/album/' + p.image
-            // })
-            console.log(this.photos)
         })
     },
     methods: {
@@ -58,6 +56,9 @@ export default {
         backToBlog () {
             this.$router.push('/')
         }
+    },
+    components: {
+        LineButton
     }
 }
 </script>
@@ -79,7 +80,11 @@ body {
         width:100%;
         height: 100%;
         background: rgb(82, 128, 180) no-repeat center center;
-        background-size: cover ;
+        background-size: cover;
+
+        &.active {
+            z-index: 10;
+        }
     }
 
     .photo-mask {
@@ -99,8 +104,9 @@ body {
         color: #aaa;
         width: 100%;
         height: 100%;
-        background: #03070c8a;
+        background: #03070c;
         vertical-align: bottom;
+        opacity: 0.5;
 
         p, h3 {
             padding: 0 50px;
@@ -118,12 +124,12 @@ body {
         bottom: 20px;
     }
 }
-.photo-switch-enter, .photo-switch-leave-to {
-    opacity: 0.4;
-    transform: translateX(-100%);
+.photo-switch-enter {
+    opacity: 0;
+    transform: translateY(-100%);
 }
-.photo-switch-leave {
-    transform: translateX(100%);
+.photo-switch-leave-to {
+    transform: translateY(-100%);
 }
 .photo-switch-enter-active, .photo-switch-leave-active {
     position: absolute;
