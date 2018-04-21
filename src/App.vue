@@ -1,13 +1,13 @@
 <template>
-        <div id="app">
-            <Navigator></Navigator>
-            <div class="content" v-loading="isLoading">
-                <transition name="router" mode="out-in">
-                    <router-view/>
-                </transition>
-            </div>
-            <FarFooter></FarFooter>
+    <div id="app" :class="{'full-screen': isFullScreen}">
+        <Navigator></Navigator>
+        <div class="content" v-loading="isLoading">
+            <transition name="router" mode="out-in">
+                <router-view/>
+            </transition>
         </div>
+        <FarFooter></FarFooter>
+    </div>
 </template>
 
 <script>
@@ -18,7 +18,8 @@ export default {
     name: 'app',
     data: function() {
         return {
-            isLoading: false
+            isLoading: false,
+            isFullScreen: false
         }
     },
     mounted: function() {
@@ -29,6 +30,9 @@ export default {
         })
         this.$router.afterEach((to, from) => {
             app.isLoading = false
+        })
+        this.$bus.$on('full-screen', (status) => {
+            this.isFullScreen = status
         })
     },
     methods: {
@@ -41,17 +45,30 @@ export default {
 </script>
 
 <style lang="scss">
+html, body {
+    height: 100%;
+}
 #app {
-    width: 1200px;
+    width: 100%;
     margin: 0 auto;
     font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: left;
     color: #2c3e50;
+    height: 100%;
+    position: relative;
+    top: 0;
+    left: 0;
 
     &>.content {
         padding-top: 50px;
+        margin: 0 auto;
+        width: 800px;
+    }
+
+    &.full-screen {
+        overflow: hidden;
     }
 }
 .router-enter {

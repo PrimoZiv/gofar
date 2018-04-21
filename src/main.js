@@ -7,6 +7,7 @@ import App from './App'
 import router from './router'
 import VueResource from 'vue-resource'
 import fetchData from './plugins/fetch'
+import bus from './plugins/bus'
 import {
     Tag,
     Menu,
@@ -29,6 +30,7 @@ import {
 Vue.config.productionTip = false
 Vue.use(VueResource)
 Vue.use(fetchData)
+Vue.use(bus)
 
 Vue.use(Tag)
 Vue.use(Menu)
