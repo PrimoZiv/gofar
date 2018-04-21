@@ -34,9 +34,13 @@ export default {
         }
     },
     mounted () {
+        this.$bus.$emit('full-screen', true)
         this.$getData('/static/data/album.json').then(data => {
             this.photos = this.photos.concat(data)
         })
+    },
+    destroyed () {
+        this.$bus.$emit('full-screen', false)
     },
     methods: {
         activePrev () {
@@ -62,11 +66,6 @@ export default {
     }
 }
 </script>
-<style>
-body {
-    overflow: hidden;
-}
-</style>
 <style lang="scss" scoped>
 .container {
     position: absolute;

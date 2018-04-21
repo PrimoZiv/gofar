@@ -58,7 +58,9 @@ export default {
     background-color: #0099CC;
 
     .el-row {
+        width: 800px;
         height: 60px;
+        margin: 0 auto;
 
         .el-from {
             .el-form-item {
