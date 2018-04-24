@@ -8,7 +8,11 @@
                              'left-line': y === 1,
                              'right-line': y === 9,
                              'top-split': x === 4 || x === 7,
-                             'left-split': y === 4 || y === 7}">{{x}}{{y}}</div>
+                             'left-split': y === 4 || y === 7,
+                             'selected': x === selected.x && y === selected.y}"
+                    @click="selectBox(x, y)">
+                    {{x}}{{y}}
+                </div>
             </div>
         </div>
     </div>
@@ -18,7 +22,11 @@
 export default {
     data () {
         return {
-            clientSize: 0
+            clientSize: 0,
+            selected: {
+                x: 0,
+                y: 0
+            }
         }
     },
     mounted () {
@@ -27,6 +35,11 @@ export default {
 
         window.onresize = () => {
             this.clientSize = this.getClientSize()
+        }
+        document.onkeyup = (e) => {
+            if (e.keyCode === 27) {
+                this.$router.push('/')
+            }
         }
     },
     destroyed () {
@@ -37,6 +50,11 @@ export default {
             let w = document.body.clientWidth
             let h = document.body.clientHeight
             return (w > h ? h : w) + 'px'
+        },
+        selectBox (x, y) {
+            // 如果不是disable的单元格则可以选中
+            this.selected.x = x
+            this.selected.y = y
         }
     }
 }
@@ -79,30 +97,36 @@ $borderColor: rgb(165, 140, 59);
         display: inline-block;
         border-left: 1px solid $borderColor;
         border-top: 1px solid $borderColor;
+        cursor: pointer;
 
         display: flex;
         justify-content: center;
         align-items: center;
 
+        &.disabled {
+            cursor: default;
+        }
+
+        &.selected {
+            background: $borderColor;
+        }
+
+        // Border Style
         &.top-line {
             border-top-width: 3px;
         }
         &.left-line {
             border-left-width: 3px;
         }
-
         &.bottom-line {
             border-bottom: 3px solid $borderColor;
         }
-
         &.right-line {
             border-right: 3px solid $borderColor;
         }
-
         &.top-split {
             border-top-width: 3px;
         }
-
         &.left-split {
             border-left-width: 3px;
         }
