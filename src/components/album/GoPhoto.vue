@@ -128,9 +128,10 @@ export default {
     transform: translateY(-100%);
 }
 .photo-switch-leave-to {
+    opacity: 0;
     transform: translateY(-100%);
 }
-.photo-switch-enter-active, .photo-switch-leave-active {
+.photo-switch-leave-active {
     position: absolute;
 }
 .back-photo {
