@@ -12,6 +12,11 @@
                     <el-menu-item index="/notes">笔记</el-menu-item>
                     <el-menu-item index="/articles">文章</el-menu-item>
                     <el-menu-item index="/album">相册</el-menu-item>
+                    <el-submenu index="/">
+                        <template slot="title">小游戏</template>
+                        <el-menu-item index="/game/sudoku">数独</el-menu-item>
+                        <el-menu-item index="/game/match">配对</el-menu-item>
+                    </el-submenu>
                 </el-menu>
             </el-col>
             <el-col :span="2">
@@ -71,6 +76,10 @@ export default {
         .el-button {
             color: white;
         }
+    }
+
+    .el-menu {
+        border-bottom: none;
     }
 }
 </style>

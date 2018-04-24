@@ -9,6 +9,8 @@ const Articles = () => import(/* webpackChunkName: "Article" */'@/components/art
 const Notes = () => import(/* webpackChunkName: "Article" */'@/components/articles/Notes')
 const ArticleDetail = () => import(/* webpackChunkName: "Article" */'@/components/articles/ArticleDetail')
 const GoPhoto = () => import(/* webpackChunkName: "Album" */'@/components/album/GoPhoto')
+const Sudoku = () => import(/* webpackChunkName: "Game" */'@/components/game/GameSudoku')
+const Match = () => import(/* webpackChunkName: "Game" */'@/components/game/GameMatch')
 
 Vue.use(Router)
 
@@ -32,11 +34,19 @@ export default new Router({
         path: '/articles',
         component: Articles
     }, {
-        path: '/:dir/:name',
-        component: ArticleDetail
-    }, {
         path: '/album',
         name: 'GoPhoto',
         component: GoPhoto
+    }, {
+        path: '/game/sudoku',
+        name: 'sudoku',
+        component: Sudoku
+    }, {
+        path: '/game/match',
+        name: 'match',
+        component: Match
+    }, {
+        path: '/:dir/:name',
+        component: ArticleDetail
     }]
 })
