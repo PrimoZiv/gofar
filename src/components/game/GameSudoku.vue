@@ -11,22 +11,38 @@
                              'left-split': y === 4 || y === 7,
                              'selected': x === selected.x && y === selected.y}"
                     @click="selectBox(x, y)">
-                    {{x}}{{y}}
+                    {{getMmatrix(x, y)}}
                 </div>
             </div>
         </div>
+        <div class="sudoku-mask" v-show="menu"></div>
+        <div class="btn-start" v-show="menu" @click="sudoku">{{menuText}}</div>
     </div>
 </template>
 
 <script>
+import sudoku from 'sudoku-matrix'
 export default {
     data () {
         return {
+            menu: true,
+            menuText: 'Start',
             clientSize: 0,
             selected: {
                 x: 0,
                 y: 0
-            }
+            },
+            matrix: [
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0]
+            ]
         }
     },
     mounted () {
@@ -55,6 +71,20 @@ export default {
             // 如果不是disable的单元格则可以选中
             this.selected.x = x
             this.selected.y = y
+        },
+        sudoku () {
+            this.menuText = 'Loading'
+            setTimeout(() => {
+                let matrix = sudoku()
+                this.matrix.splice(0, this.matrix.length, ...matrix)
+                this.menuText = 'Start'
+                this.menu = false
+            }, 10)
+        },
+        getMmatrix (x, y) {
+            x = +x
+            y = +y
+            return this.matrix && this.matrix[x - 1][y - 1]
         }
     }
 }
@@ -72,6 +102,32 @@ $borderColor: rgb(165, 140, 59);
     display: flex;
     justify-content: center;
     align-items: center;
+
+    .sudoku-mask {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.5;
+        background: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .btn-start {
+        position: absolute;
+        width: 200px;
+        height: 100px;
+        line-height: 100px;
+        background: #fff;
+        opacity: 1;
+        font-size: 50px;
+        text-align: center;
+        border-radius: 10px;
+        cursor: pointer;
+    }
 
     .sudoku-table {
         width: 100%;
@@ -93,7 +149,7 @@ $borderColor: rgb(165, 140, 59);
         width: 10%;
         height: 100%;
         color: #e0e0e0;
-        font-size: 20px;
+        font-size: 30px;
         display: inline-block;
         border-left: 1px solid $borderColor;
         border-top: 1px solid $borderColor;
