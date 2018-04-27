@@ -17,18 +17,36 @@
             </div>
         </div>
         <div class="sudoku-mask" v-show="menu"></div>
-        <div class="btn-start" v-show="menu" @click="sudoku">{{menuText}}</div>
+        <div class="btn-start" v-show="menu">
+            <div>
+                <el-radio-group v-model="level">
+                    <el-radio :label="16">入门</el-radio>
+                    <el-radio :label="20">简单</el-radio>
+                    <el-radio :label="30">中等</el-radio>
+                    <el-radio :label="40">困难</el-radio>
+                </el-radio-group>
+            </div>
+            <div>
+                <el-button type="primary" @click="sudoku">{{menuText}}</el-button>
+            </div>
+        </div>
+        <div class="btn-area">
+            <el-button type="primary" @click="open">Check</el-button>
+        </div>
     </div>
 </template>
 
 <script>
-import {blink} from 'sudoku-matrix'
+import {blink, checkMatrix} from 'sudoku-matrix'
 export default {
     data () {
         return {
             menu: true,
             menuText: 'Start',
             clientSize: 0,
+            level: 20,
+            steps: 0,
+            checkMsg: 'Not completed.',
             selected: {
                 x: -1,
                 y: -1
@@ -91,7 +109,7 @@ export default {
         sudoku () {
             this.menuText = 'Loading'
             setTimeout(() => {
-                let m = blink()
+                let m = blink(this.level)
                 this.matrixM = m
                 this.matrix.splice(0, this.matrix.length, [...m[0]], [...m[1]], [...m[2]], [...m[3]],
                         [...m[4]], [...m[5]], [...m[6]], [...m[7]], [...m[8]])
@@ -115,64 +133,30 @@ export default {
 
             if (number && this.selected.x !== -1 && this.selected.y !== -1) {
                 this.$set(this.matrix[this.selected.x], this.selected.y, number)
-                if (this.checkMatrix(this.matrix) === true) {
+                let res = checkMatrix(this.matrix)
+                if (res === true) {
+                    this.selected.x = -1
+                    this.selected.y = -1
                     this.menu = true
-                    this.menuText = 'Success!'
+                    this.menuText = 'Success! Use ' + this.steps + ' steps.'
+                    this.steps = 0
+                    this.checkMsg = 'Not completed.'
+                } else {
+                    this.steps++
+                    if (res === false) {
+                        this.checkMsg = 'Not completed.'
+                    } else if (res.row) {
+                        this.checkMsg = 'The ' + (res.row + 1) + ' line repeats.'
+                    } else if (res.column) {
+                        this.checkMsg = 'The ' + (res.column + 1) + ' column repeats.'
+                    } else if (res.block) {
+                        this.checkMsg = 'THe ' + (res.block[0] * 3 + res.block[1] + 1) + 'block repeats.'
+                    }
                 }
             }
         },
-        checkMatrix (matrix) {
-            // Check row
-            for (let [i, r] of matrix.entries()) {
-                if (r.includes(0)) {
-                    return false
-                } else if ((new Set(r)).size < 9) {
-                    return {
-                        row: i
-                    }
-                }
-            }
-
-            // Check column
-            let count = 9
-            let s = new Set()
-            while (count--) {
-                s.clear()
-                for (let i = 0; i < 9; i++) {
-                    if (!/^[1-9]$/.test(matrix[i][count])) {
-                        return false
-                    }
-                    s.add(matrix[i][count])
-                }
-                if (s.size < 9) {
-                    return {
-                        column: count
-                    }
-                }
-            }
-
-            // Check block
-            for (let x = 0; x < 3; x++) {
-                for (let y = 0; y < 3; y++) {
-                    let m = x * 3
-                    let n = y * 3
-                    let block = [
-                        matrix[m][n], matrix[m][n + 1], matrix[m][n + 2],
-                        matrix[m + 1][n], matrix[m + 1][n + 1], matrix[m + 1][n + 2],
-                        matrix[m + 2][n], matrix[m + 2][n + 1], matrix[m + 2][n + 2]
-                    ]
-
-                    if (block.includes(0)) {
-                        return false
-                    } else if ((new Set(block)).size < 9) {
-                        return {
-                            block: [x, y]
-                        }
-                    }
-                }
-            }
-
-            return true
+        open() {
+            this.$message(this.checkMsg)
         }
     }
 }
@@ -191,7 +175,7 @@ $borderColor: rgb(165, 140, 59);
     justify-content: center;
     align-items: center;
 
-    .sudoku-mask, .sudoku-bingo {
+    .sudoku-mask {
         position: absolute;
         top: 0;
         left: 0;
@@ -202,12 +186,11 @@ $borderColor: rgb(165, 140, 59);
         display: flex;
         justify-content: center;
         align-items: center;
+        z-index: 50;
     }
 
     .btn-start {
         position: absolute;
-        width: 200px;
-        height: 100px;
         line-height: 100px;
         background: #fff;
         opacity: 1;
@@ -215,6 +198,15 @@ $borderColor: rgb(165, 140, 59);
         text-align: center;
         border-radius: 10px;
         cursor: pointer;
+        padding: 20px;
+        z-index: 50;
+    }
+
+    .btn-area {
+        position: absolute;
+        right: 2%;
+        top: 2%;
+        z-index: 10;
     }
 
     .sudoku-table {

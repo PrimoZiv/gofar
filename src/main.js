@@ -3,52 +3,19 @@
 import Vue from 'vue'
 import 'normalize.css'
 import 'element-ui/lib/theme-chalk/index.css'
+import ElementUI from 'element-ui'
 import App from './App'
 import router from './router'
 import VueResource from 'vue-resource'
 import fetchData from './plugins/fetch'
 import bus from './plugins/bus'
-import {
-    Tag,
-    Menu,
-    Submenu,
-    MenuItem,
-    MenuItemGroup,
-    Input,
-    Button,
-    Form,
-    FormItem,
-    Icon,
-    Row,
-    Col,
-    Card,
-    Carousel,
-    CarouselItem,
-    Loading
-  } from 'element-ui'
 
 Vue.config.productionTip = false
 Vue.use(VueResource)
 Vue.use(fetchData)
 Vue.use(bus)
 
-Vue.use(Tag)
-Vue.use(Menu)
-Vue.use(Submenu)
-Vue.use(MenuItem)
-Vue.use(MenuItemGroup)
-Vue.use(Input)
-Vue.use(Button)
-Vue.use(Form)
-Vue.use(FormItem)
-Vue.use(Icon)
-Vue.use(Row)
-Vue.use(Col)
-Vue.use(Card)
-Vue.use(Carousel)
-Vue.use(CarouselItem)
-Vue.use(Loading.directive)
-Vue.prototype.$loading = Loading.service
+Vue.use(ElementUI)
 
 /* eslint-disable no-new */
 new Vue({
