@@ -18,12 +18,15 @@
         </div>
         <div class="sudoku-mask" v-show="menu"></div>
         <div class="btn-start" v-show="menu">
+            <div class="tip">
+                <span>按Esc键退出</span>
+            </div>
             <div>
                 <el-radio-group v-model="level">
                     <el-radio :label="16">入门</el-radio>
-                    <el-radio :label="20">简单</el-radio>
-                    <el-radio :label="30">中等</el-radio>
-                    <el-radio :label="40">困难</el-radio>
+                    <el-radio :label="24">简单</el-radio>
+                    <el-radio :label="38">中等</el-radio>
+                    <el-radio :label="50">困难</el-radio>
                 </el-radio-group>
             </div>
             <div>
@@ -44,7 +47,7 @@ export default {
             menu: true,
             menuText: 'Start',
             clientSize: 0,
-            level: 20,
+            level: 24,
             steps: 0,
             checkMsg: 'Not completed.',
             selected: {
@@ -191,7 +194,6 @@ $borderColor: rgb(165, 140, 59);
 
     .btn-start {
         position: absolute;
-        line-height: 100px;
         background: #fff;
         opacity: 1;
         font-size: 40px;
@@ -267,6 +269,10 @@ $borderColor: rgb(165, 140, 59);
         &.left-split {
             border-left-width: 3px;
         }
+    }
+    .tip {
+        font-size: 16px;
+        line-height: 30px;
     }
 }
 </style>
