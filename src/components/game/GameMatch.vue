@@ -3,7 +3,8 @@
         <transition-group tag="div" name="cell" class="match-table" :style="{width: clientSize, height: clientSize}">
             <div v-for="(v, id) of icons" :key="v.id" class="match-item"
                 @click="turnOver(id)"
-                :class="[turn.includes(id) ? 'turn' : '']">
+                :class="{'turn' : turn.includes(id),
+                    'active': hintCells.includes(v.name)}">
 
                 <div class="match-icon"
                     :class="['el-icon-' + v.name,
@@ -22,11 +23,15 @@
                 <el-button type="primary" @click="refresh">{{btnText}}</el-button>
             </div>
         </div>
+        <div class="btn-area">
+            <el-button type="primary" @click="hint">Hint</el-button>
+        </div>
     </div>
 </template>
 
 <script>
 import {shuffle} from 'lodash'
+const MAX_HINT_NUM = 3
 export default {
     data () {
         return {
@@ -46,6 +51,8 @@ export default {
             clientSize: 0,
             turn: [],
             successCells: [],
+            hintCells: [],
+            hintCount: MAX_HINT_NUM,
             complete: false,
             btnText: 'Refresh',
             stepCount: 0
@@ -83,6 +90,7 @@ export default {
             let t = this.turn
 
             this.stepCount++
+            this.hintCells.splice(0)
 
             if (!t.includes(index) && !this.successCells.includes(this.icons[index].name)) {
                 m = t.push(index)
@@ -111,15 +119,33 @@ export default {
         },
         refresh () {
             this.complete = false
-            this.turn.splice(0, this.turn.length)
-            this.successCells.splice(0, this.successCells.length)
+            this.turn.splice(0)
+            this.hintCells.splice(0)
+            this.successCells.splice(0)
             this.icons = shuffle(this.icons)
             this.stepCount = 0
+            this.hintCount = MAX_HINT_NUM
         },
         checkSuccess () {
             if (this.successCells.length === this.types) {
                 this.btnText = 'Success! Use ' + this.stepCount + ' steps.'
                 this.complete = true
+            }
+        },
+        hint () {
+            this.hintCells.splice(0)
+
+            if (!this.hintCount) {
+                this.$message('Reach maximum limit.')
+                return
+            }
+
+            for (let i of this.icons) {
+                if (!this.successCells.includes(i.name)) {
+                    this.hintCells.push(i.name)
+                    this.hintCount--
+                    return
+                }
             }
         }
     }
@@ -166,6 +192,13 @@ export default {
         z-index: 50;
     }
 
+    .btn-area {
+        position: absolute;
+        right: 2%;
+        top: 2%;
+        z-index: 10;
+    }
+
     .match-table {
         width: 100%;
         height: 100%;
@@ -188,6 +221,11 @@ export default {
         font-size: 200%;
         border-radius: 10%;
         backface-visibility: visible;
+        box-sizing: border-box;
+
+        &.active {
+            border: 5px rgb(134, 36, 36) solid;
+        }
     }
 
     .match-icon {
