@@ -88,8 +88,10 @@ export default {
         document.onkeyup = (e) => {
             if (e.keyCode === 27) {
                 this.$router.push('/')
-            } else {
+            } else if ((e.keyCode >= 49 && e.keyCode <= 57) || (e.keyCode >= 97 && e.keyCode <= 105)) {
                 this.fillNumber(e)
+            } else if (e.keyCode >= 37 && e.keyCode <= 40) {
+                this.focusCell(e.keyCode)
             }
         }
     },
@@ -156,6 +158,115 @@ export default {
                         this.checkMsg = 'THe ' + (res.block[0] * 3 + res.block[1] + 1) + 'block repeats.'
                     }
                 }
+            }
+        },
+        // Keyboard arrow operation.
+        focusCell (code) {
+            let m = this.matrixM
+            let x = this.selected.x
+            let y = this.selected.y
+            let first = false
+            let last = false
+            let next = false
+            let prev = false
+
+            if (code === 37 || code === 39) {
+                for (let i = 0, len = m.length; i < len; i++) {
+                    for (let j = 0, lenJ = m[i].length; j < lenJ; j++) {
+                        if (m[i][j] === 0) {
+                            if (!first) {
+                                first = {
+                                    x: i,
+                                    y: j
+                                }
+                            }
+                            last = {
+                                x: i,
+                                y: j
+                            }
+                            if (i < x || (i === x && j < y)) {
+                                prev = {
+                                    x: i,
+                                    y: j
+                                }
+                            }
+                            if (!next && (i > x || (i === x && j > y))) {
+                                next = {
+                                    x: i,
+                                    y: j
+                                }
+                            }
+                        }
+                    }
+                }
+            } else {
+                for (let i = 0, len = m.length; i < len; i++) {
+                    for (let j = 0, lenJ = m[i].length; j < lenJ; j++) {
+                        if (m[j][i] === 0) {
+                            if (!first) {
+                                first = {
+                                    x: j,
+                                    y: i
+                                }
+                            }
+                            last = {
+                                x: j,
+                                y: i
+                            }
+                            if (i < y || (i === y && j < x)) {
+                                prev = {
+                                    x: j,
+                                    y: i
+                                }
+                            }
+                            if (!next && (i > y || (i === y && j > x))) {
+                                next = {
+                                    x: j,
+                                    y: i
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            switch (code) {
+            case 37:
+                if (x < first.x || (x === first.x && y <= first.y)) {
+                    this.selected.x = last.x
+                    this.selected.y = last.y
+                } else {
+                    this.selected.x = prev.x
+                    this.selected.y = prev.y
+                }
+                break
+            case 38:
+                if (y < first.y || (y === first.y && x <= first.x)) {
+                    this.selected.x = last.x
+                    this.selected.y = last.y
+                } else {
+                    this.selected.x = prev.x
+                    this.selected.y = prev.y
+                }
+                break
+            case 39:
+                if (x > last.x || (x === last.x && y >= last.y)) {
+                    this.selected.x = first.x
+                    this.selected.y = first.y
+                } else {
+                    this.selected.x = next.x
+                    this.selected.y = next.y
+                }
+                break
+            case 40:
+                if (y > last.y || (y === last.y && x >= last.x)) {
+                    this.selected.x = first.x
+                    this.selected.y = first.y
+                } else {
+                    this.selected.x = next.x
+                    this.selected.y = next.y
+                }
+                break
             }
         },
         open() {
