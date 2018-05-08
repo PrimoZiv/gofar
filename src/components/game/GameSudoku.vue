@@ -112,7 +112,7 @@ export default {
             }
         },
         sudoku () {
-            this.menuText = 'Loading'
+            this.menuText = 'Loading...'
             setTimeout(() => {
                 let m = blink(this.level)
                 this.matrixM = m
@@ -155,7 +155,7 @@ export default {
                     } else if (res.column) {
                         this.checkMsg = 'The ' + (res.column + 1) + ' column repeats.'
                     } else if (res.block) {
-                        this.checkMsg = 'THe ' + (res.block[0] * 3 + res.block[1] + 1) + 'block repeats.'
+                        this.checkMsg = 'The ' + (res.block[0] * 3 + res.block[1] + 1) + 'block repeats.'
                     }
                 }
             }
