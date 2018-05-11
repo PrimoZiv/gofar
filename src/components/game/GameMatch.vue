@@ -4,7 +4,7 @@
             <div v-for="(v, id) of icons" :key="v.id" class="match-item"
                 @click="turnOver(id)"
                 :class="{'turn' : turn.includes(id),
-                    'active': hintCells.includes(v.name)}">
+                    'active': hintCell === v.name}">
 
                 <div class="match-icon"
                     :class="['el-icon-' + v.name,
@@ -24,7 +24,8 @@
             </div>
         </div>
         <div class="btn-area">
-            <el-button type="primary" @click="hint">Hint</el-button>
+            <span class="match-record" v-if="matchRecord">Record: {{matchRecord}}</span>
+            <el-button type="primary" @click="hint">Hint ({{hintCount}})</el-button>
         </div>
     </div>
 </template>
@@ -51,11 +52,13 @@ export default {
             clientSize: 0,
             turn: [],
             successCells: [],
-            hintCells: [],
+            hintCell: '',
+            hintHistory: [],
             hintCount: MAX_HINT_NUM,
             complete: false,
             btnText: 'Refresh',
-            stepCount: 0
+            stepCount: 0,
+            matchRecord: localStorage.getItem('matchRecord')
         }
     },
     mounted () {
@@ -90,7 +93,8 @@ export default {
             let t = this.turn
 
             this.stepCount++
-            this.hintCells.splice(0)
+            this.hintHistory.push(this.hintCell)
+            this.hintCell = ''
 
             if (!t.includes(index) && !this.successCells.includes(this.icons[index].name)) {
                 m = t.push(index)
@@ -120,7 +124,7 @@ export default {
         refresh () {
             this.complete = false
             this.turn.splice(0)
-            this.hintCells.splice(0)
+            this.hintCell = ''
             this.successCells.splice(0)
             this.icons = shuffle(this.icons)
             this.stepCount = 0
@@ -128,21 +132,25 @@ export default {
         },
         checkSuccess () {
             if (this.successCells.length === this.types) {
-                this.btnText = 'Success! Use ' + this.stepCount + ' steps.'
+                if (!this.matchRecord || parseInt(this.matchRecord, 10) > this.stepCount) {
+                    this.btnText = 'New record! Use ' + this.stepCount + ' steps.'
+                    this.matchRecord = this.stepCount
+                    localStorage.setItem('matchRecord', this.stepCount)
+                } else {
+                    this.btnText = 'Success! Use ' + this.stepCount + ' steps.'
+                }
                 this.complete = true
             }
         },
         hint () {
-            this.hintCells.splice(0)
-
             if (!this.hintCount) {
                 this.$message('Reach maximum limit.')
                 return
             }
 
             for (let i of this.icons) {
-                if (!this.successCells.includes(i.name)) {
-                    this.hintCells.push(i.name)
+                if (!this.successCells.includes(i.name) && !this.hintHistory.includes(i.name)) {
+                    this.hintCell = i.name
                     this.hintCount--
                     return
                 }
@@ -197,6 +205,11 @@ export default {
         right: 2%;
         top: 2%;
         z-index: 10;
+        color: #ccc;
+
+        .match-record {
+            padding: 0 10px;
+        }
     }
 
     .match-table {
