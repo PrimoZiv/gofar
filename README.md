@@ -1,5 +1,7 @@
 # gofar
 
+![build](https://travis-ci.com/PrimoZiv/gofar.svg?branch=master)
+
 > Go far.
 
 ## Build Setup
