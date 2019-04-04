@@ -23,7 +23,7 @@
 ```
 完成后首先发现页面中要切换的两个元素会在动画过程中堆叠起来
 
-![元素堆叠](/static/articles/vue-transition-echarts/addon.png)
+![元素堆叠](static/articles/vue-transition-echarts/addon.png)
 
 尝试通过去掉移除动画，保留进入动画的方式解决。
 
@@ -49,7 +49,7 @@
 在测试页面的过程中发现两个Map页功能出现了问题，刷新后第一次进入的那个Map可以正常展示，另一个页面无法显示。
 查看控制台，有如下警告信息：
 
-![echarts警告](/static/articles/vue-transition-echarts/echarts-error.png)
+![echarts警告](static/articles/vue-transition-echarts/echarts-error.png)
 
 大意应该是页面中已经有一个echarts实例了，所以不能再次初始化。
 

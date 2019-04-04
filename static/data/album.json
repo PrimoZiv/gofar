@@ -3,25 +3,25 @@
     "data": [
         {
             "key": 0,
-            "image": "/static/album/DSC_0320.jpg",
+            "image": "static/album/DSC_0320.jpg",
             "title": "西部华侨城高空吊桥",
             "description": "半空中的桥，走上去摇摇晃晃，这里反而不同于其他地方的熙熙攘攘，大家都沉醉在周围的景色中"
         },
         {
             "key": 1,
-            "image": "/static/album/DSC_0484.jpg",
+            "image": "static/album/DSC_0484.jpg",
             "title": "泉州民俗博物馆中的黑白无常",
             "description": "我觉得他们挺好看的，然后就设置成了微信运动的背景图片，每当占领封面就格外舒爽"
         },
         {
             "key": 2,
-            "image": "/static/album/DSC_0489.jpg",
+            "image": "static/album/DSC_0489.jpg",
             "title": "厦门大学旁的沙滩",
             "description": "当夕阳西下，夜色降临，海边开始安静下来，只剩下我和这美丽的夜色"
         },
         {
             "key": 3,
-            "image": "/static/album/DSC_0521.jpg",
+            "image": "static/album/DSC_0521.jpg",
             "title": "鼓浪屿纪念馆中的猫",
             "description": "慵懒的身姿，霸气的眼神"
         }

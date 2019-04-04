@@ -16,7 +16,7 @@ export default {
         }
     },
     mounted () {
-        this.$http.get('/static/' + this.dir + '/' + this.name + '/' + this.name + '.md').then(res => {
+        this.$http.get('static/' + this.dir + '/' + this.name + '/' + this.name + '.md').then(res => {
             this.content = res.body
         })
     },

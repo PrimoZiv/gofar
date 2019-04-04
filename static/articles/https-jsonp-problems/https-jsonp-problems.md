@@ -5,7 +5,7 @@
 
 应用场景大致如下：
 
-![拓扑](/static/articles/https-jsonp-problems/jsonp.png)
+![拓扑](static/articles/https-jsonp-problems/jsonp.png)
 
 - 由于本地软件内部的服务器只能对HTTPS进行自签名，导致浏览器不信任该HTTPS
 - 打开云端页面后，页面首先通过jsonp跨域请求判断服务器是否可以通过本地访问，如果可以则跳转到本地IP

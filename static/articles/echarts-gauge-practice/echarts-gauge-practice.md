@@ -2,11 +2,11 @@
 
 项目过程中遇到一个这样的需求:
 
-![gauge](/static/articles/echarts-gauge-practice/gauge.png)
+![gauge](static/articles/echarts-gauge-practice/gauge.png)
 
 这明显是一个仪表盘类型的图表，打开echarts的官方文档，可以看到有一个默认的实现，如下：
 
-![default](/static/articles/echarts-gauge-practice/default.png)
+![default](static/articles/echarts-gauge-practice/default.png)
 
 使用了默认的参数
 ```javascript
@@ -73,7 +73,7 @@ option = {
 ```
 经过这样修改的话，确实初步达到了我们要的效果。
 
-![Try1](/static/articles/echarts-gauge-practice/try1.png)
+![Try1](static/articles/echarts-gauge-practice/try1.png)
 
 但是仔细看的话，会发现一个问题，指针的指向是空白处。原因就是空白的地方是刻度，而有颜色的地方是轴线。
 这样的话最终指针指向的数据是不准确的，而且这个方案还有一个问题就是渐变颜色的处理。
@@ -119,7 +119,7 @@ option = {
     ]
 };
 ```
-![Try](/static/articles/echarts-gauge-practice/try2.png)
+![Try](static/articles/echarts-gauge-practice/try2.png)
 
 可以看到效果有了，而且指针位置正确。
 
@@ -169,7 +169,7 @@ color: {
 
 首先用PS画一个和画布一样大小的渐图案
 
-![Linear](/static/articles/echarts-gauge-practice/linear.jpg)
+![Linear](static/articles/echarts-gauge-practice/linear.jpg)
 
 在配置中使用image选项
 ```javascript
@@ -192,7 +192,7 @@ option = {
 ```
 这样项目中的需求就可以完美解决了
 
-![result](/static/articles/echarts-gauge-practice/result.png)
+![result](static/articles/echarts-gauge-practice/result.png)
 
 ### 颜色分段
 
@@ -323,7 +323,7 @@ calculateOption: function (params) {
 ```
 效果如下：
 
-![Result2](/static/articles/echarts-gauge-practice/result2.png)
+![Result2](static/articles/echarts-gauge-practice/result2.png)
 
 ### 指针类型
 
