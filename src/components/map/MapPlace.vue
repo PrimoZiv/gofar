@@ -120,7 +120,7 @@ export default {
         }
     },
     mounted: function() {
-        this.$getData('/static/data/mappoint.json').then(data => {
+        this.$getData('static/data/mappoint.json').then(data => {
             this.data = []
             for (let i = 0, len = data.length; i < len; i++) {
                 this.$set(this.data, i, {

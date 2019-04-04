@@ -35,7 +35,7 @@ export default {
     },
     mounted () {
         this.$bus.$emit('full-screen', true)
-        this.$getData('/static/data/album.json').then(data => {
+        this.$getData('static/data/album.json').then(data => {
             this.photos = this.photos.concat(data)
         })
     },

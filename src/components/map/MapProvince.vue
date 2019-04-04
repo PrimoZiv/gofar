@@ -59,7 +59,7 @@ export default {
         }
     },
     mounted: function() {
-        this.$getData('/static/data/footprint.json').then(data => {
+        this.$getData('static/data/footprint.json').then(data => {
             this.option.series[0].data = data
             this.$set(this.option.series, 0, this.option.series[0])
             this.$emit('loading')

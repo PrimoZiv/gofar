@@ -14,7 +14,7 @@ export default {
         }
     },
     mounted () {
-        this.$getData('/static/data/articles.json').then(data => {
+        this.$getData('static/data/articles.json').then(data => {
             this.articles = this.articles.concat(data).sort((a1, a2) => {
                 return a2.time - a1.time
             })

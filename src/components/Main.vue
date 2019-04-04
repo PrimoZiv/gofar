@@ -29,8 +29,8 @@ export default {
     },
     mounted: function() {
         Promise.all([
-            this.$getData('/static/data/articles.json'),
-            this.$getData('/static/data/notes.json')
+            this.$getData('static/data/articles.json'),
+            this.$getData('static/data/notes.json')
         ]).then(data => {
             data[0].map(v => {
                 v.type = 'articles'
